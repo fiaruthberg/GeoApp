@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GeoApp
 {
-    class ReligionInCountry
+     public class ReligionInCountry
     {
 		public int CountryId { get; set; }
 		public Country Country { get; set; }
