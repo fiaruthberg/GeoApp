@@ -16,7 +16,7 @@ namespace GeoApp
 	    public DbSet<Terrain> Terrains { get; set; }
 		public DbSet<Language> Languages { get; set; }
 		public DbSet<LanguageInCountry> LanguagesInCoyntry { get; set; }
-		public DbSet<Government_Polity_> GovernmentPolities { get; set; }
+		public DbSet<GovernmentPolity> GovernmentPolities { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
