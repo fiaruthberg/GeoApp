@@ -4,6 +4,8 @@ namespace GeoApp
 {
     class Program
     {
+        private static DataAccess dataAccess = new DataAccess();
+
         static void Main(string[] args)
         {
             ClearDatabase();
@@ -12,9 +14,8 @@ namespace GeoApp
 
         private static void ClearDatabase()
         {
-            var dataAccess = new DataAccess();
             dataAccess.ClearDatabase();
-
+            dataAccess.SaveChanges();
         }
 
         private static void InitDatabase()

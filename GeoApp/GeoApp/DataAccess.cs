@@ -33,10 +33,19 @@ namespace GeoApp
             {
                 context.Remove(climate);
             }
-            foreach (var climate in context.Climates)
+            foreach (var continent in context.Continents)
             {
-                context.Remove(climate);
+                context.Remove(continent);
             }
+            foreach (var country in context.Countries)
+            {
+                context.Remove(country);
+            }
+        }
+
+        internal void SaveChanges()
+        {
+            context.SaveChanges();
         }
     }
 }
