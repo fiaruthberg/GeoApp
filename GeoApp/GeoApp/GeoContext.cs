@@ -16,5 +16,10 @@ namespace GeoApp
 			optionsBuilder.UseSqlServer(
 			  "Server = (localdb)\\mssqllocaldb; Database = GeoApp;");
 		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<ReligionInCountry>().HasKey(x => new { x.ReligionId, x.CountryId });
+		}
 	}
 }
