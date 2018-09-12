@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GeoApp
 {
-   public class GeoContext : DbContext
+    class GeoContext : DbContext
     {
 		public DbSet<Country> Countries { get; set; }
 		public DbSet<Continent> Continents { get; set; }
@@ -20,6 +20,8 @@ namespace GeoApp
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<ReligionInCountry>().HasKey(x => new { x.ReligionId, x.CountryId });
-		}
+            modelBuilder.Entity<TerrainInCountry>().HasKey(x => new { x.TerrainId, x.CountryId });
+            modelBuilder.Entity<LanguageInCountry>().HasKey(x => new { x.LanguageId, x.CountryId });
+        }
 	}
 }
