@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GeoApp
 {
-    class Government_Polity_
+    public class Government_Polity_
     {
         public int Id { get; set; }
         public Polity Polity { get; set; }
