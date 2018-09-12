@@ -7,6 +7,7 @@ namespace GeoApp
         static void Main(string[] args)
         {
             Console.WriteLine("Bitcheeeees!");
+            Console.WriteLine();
         }
     }
 }
