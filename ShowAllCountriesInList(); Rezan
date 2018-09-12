@@ -1,0 +1,12 @@
+ShowAllCountriesInList(); Rezan
+ShowAllCountriesThatStartWithLetter(string letter); - användaren matar in  Rezan
+
+AddLanguageToCountry(); Boris
+DisplayCountriesByLanguage(); Boris
+
+
+ClearDatabase(); - Sofia
+DisplayCountriesByReligion(); - Sofia
+
+
+
