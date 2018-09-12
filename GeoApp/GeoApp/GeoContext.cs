@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GeoApp
 {
-    class GeoContext : DbContext
+   public class GeoContext : DbContext
     {
 		public DbSet<Country> Countries { get; set; }
 		public DbSet<Continent> Continents { get; set; }
