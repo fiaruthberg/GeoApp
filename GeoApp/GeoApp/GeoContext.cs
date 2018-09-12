@@ -10,7 +10,14 @@ namespace GeoApp
 		public DbSet<Country> Countries { get; set; }
 		public DbSet<Continent> Continents { get; set; }
 		public DbSet<Region> Regions { get; set; }
-	
+		public DbSet<Religion> Religions { get; set; }
+		public DbSet<ReligionInCountry> ReligionsInCountry { get; set; }
+		public DbSet<TerrainInCountry> TerrainInCountries { get; set; }
+	    public DbSet<Terrain> Terrains { get; set; }
+		public DbSet<Language> Languages { get; set; }
+		public DbSet<LanguageInCountry> LanguagesInCoyntry { get; set; }
+		public DbSet<Government_Polity_> GovernmentPolities { get; set; }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(
