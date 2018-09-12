@@ -6,8 +6,20 @@ namespace GeoApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Bitcheeeees!");
-            Console.WriteLine();
+            ClearDatabase();
+            InitDatabase();
+        }
+
+        private static void ClearDatabase()
+        {
+            var dataAccess = new DataAccess();
+            dataAccess.ClearDatabase();
+
+        }
+
+        private static void InitDatabase()
+        {
+            throw new NotImplementedException();
         }
     }
 }

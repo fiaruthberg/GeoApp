@@ -17,8 +17,10 @@ namespace GeoApp
 		public DbSet<Language> Languages { get; set; }
 		public DbSet<LanguageInCountry> LanguagesInCoyntry { get; set; }
 		public DbSet<GovernmentPolity> GovernmentPolities { get; set; }
+        public DbSet<Climate> Climates { get; set; }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			optionsBuilder.UseSqlServer(
 			  "Server = (localdb)\\mssqllocaldb; Database = GeoApp;");
