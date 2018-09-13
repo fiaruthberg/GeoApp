@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GeoApp
 {
@@ -55,13 +56,12 @@ namespace GeoApp
 
         private static void InitDatabase()
         {
-
-
-
-
-
-
             throw new NotImplementedException();
+        }
+        private static void DisplayCountriesByReligion()
+        {
+            List<Country> countries = dataAccess.GetCountriesByReligion();
+
         }
     }
 }

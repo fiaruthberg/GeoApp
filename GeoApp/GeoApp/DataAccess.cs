@@ -71,6 +71,11 @@ namespace GeoApp
 
         }
 
+        internal List<Country> GetCountriesByReligion()
+        {
+            throw new NotImplementedException();
+        }
+
         public void PopulateContinets()
         {
 

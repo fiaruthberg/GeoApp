@@ -12,6 +12,6 @@ namespace GeoApp
 		public List<Continent> Continent { get; set; }
 		public List<ReligionInCountry> ReligionInCountry { get; set; }
         public List<TerrainInCountry> TerrainInCountry { get; set; }
-
+        public Climate Climate { get; set; }
     }
 }
