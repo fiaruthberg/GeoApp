@@ -58,13 +58,12 @@ namespace GeoApp
 			return context.Countries.ToList();
 		}
 
-
 		public List<Country> GetAllCountriesToListWithLetter(char input)
 		{
 			return context.Countries.Where(x => x.Name.StartsWith(input)).ToList();
         }
 
-		internal List<Country> GetCountriesByReligion(Religion religion)
+		public List<Country> GetCountriesByReligion(Religion religion)
 		{
                 List<Country> newList = new List<Country>();
 
@@ -73,6 +72,16 @@ namespace GeoApp
                     newList.Add(religionInCountry.Country);
                 }
                 return newList;
+        }
+        public List<Country> GetCountriesByTerrain(TerrainType type)
+        {
+            List<Country> newList = new List<Country>();
+
+            foreach (var item in context.TerrainInCountries.Where(x=> x.Terrain.Type == type))
+            {
+                newList.Add(item.Country);
+            }
+            return newList;
         }
 
     public void PopulateSimpleTables()
