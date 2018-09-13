@@ -9,7 +9,8 @@ namespace GeoApp
 
         static void Main(string[] args)
         {
-            ClearDatabase();
+			var dataAccess = new DataAccess();
+			ClearDatabase();
             InitDatabase(); /* BORIS */
             PageMainMenu(); /* SOFIA */
         }
@@ -31,12 +32,36 @@ namespace GeoApp
 
         private static void ShowAllCountriesInList()
         {
-            throw new NotImplementedException();
+
+			var showCountries = dataAccess.GetAllCountriesToList();
+
+			foreach (var item in showCountries)
+			{
+				Console.WriteLine(item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountry + " " + item.Climate);
+			}
         }
 		private static void ShowAllCountriesWithCertainLetter()
 		{
+		    Console.WriteLine("Write a letter and show all countries that start with the letter");
+			char input = char.Parse(Console.ReadLine());
+			var showCountries = dataAccess.GetAllCountriesToListWithLetter(input);
 
-			throw new NotImplementedException();
+			foreach (var item in showCountries)
+			{
+				Console.WriteLine(item.Name + " ");
+			}
+
+		}
+
+		private static void ShowAllCountryNames()
+		{
+			var showCountries = dataAccess.GetAllCountriesToList();
+
+			foreach (var item in showCountries)
+			{
+				Console.WriteLine(item.Name + " ");
+			}
+
 		}
 		private static void WriteInWhite(string v)
         {
