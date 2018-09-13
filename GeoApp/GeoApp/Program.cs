@@ -85,9 +85,10 @@ namespace GeoApp
 
         private static void InitDatabase()
         {
-            throw new NotImplementedException();
+            dataAccess.PopulateSimpleTables();
+            dataAccess.SaveChanges();
         }
-        private static void DisplayCountriesByReligion(Religion religion)
+        private static void DisplayCountriesByReligion(string religion)
         {
             List<Country> countries = dataAccess.GetCountriesByReligion(religion);
 

@@ -63,23 +63,34 @@ namespace GeoApp
 			return context.Countries.Where(x => x.Name.StartsWith(input)).ToList();
         }
 
-		public List<Country> GetCountriesByReligion(Religion religion)
+		public List<Country> GetCountriesByReligion(string religion)
 		{
                 List<Country> newList = new List<Country>();
 
-                foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.Religion == religion))
+                foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.Religion.Name == religion))
                 {
                     newList.Add(religionInCountry.Country);
                 }
                 return newList;
         }
-        public List<Country> GetCountriesByTerrain(TerrainType type)
+        public List<Country> GetCountriesByTerrain(string type)
         {
+            TerrainType a = Enum.Parse<TerrainType>(type);
             List<Country> newList = new List<Country>();
 
-            foreach (var item in context.TerrainInCountries.Where(x=> x.Terrain.Type == type))
+            foreach (var item in context.TerrainInCountries.Where(x=> x.Terrain.Type == a))
             {
                 newList.Add(item.Country);
+            }
+            return newList;
+        }
+        public List<Country> GetCountriesByClimate(string climate)
+        {
+            var newList = new List<Country>();
+
+            foreach (var item in context.Countries.Where(x=>x.Climate.Name == climate))
+            {
+                newList.Add(item);
             }
             return newList;
         }
