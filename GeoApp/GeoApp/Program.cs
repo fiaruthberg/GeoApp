@@ -51,6 +51,20 @@ namespace GeoApp
         {
             dataAccess.ClearDatabase();
             dataAccess.SaveChanges();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
         private static void InitDatabase()
