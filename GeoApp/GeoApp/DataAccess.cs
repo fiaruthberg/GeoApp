@@ -72,10 +72,17 @@ namespace GeoApp
 
 		}
 
-		internal List<Country> GetCountriesByReligion()
+		internal List<Country> GetCountriesByReligion(Religion religion)
 		{
-			throw new NotImplementedException();
-		}
+                List<Country> newList = new List<Country>();
+
+                foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.Religion == religion))
+                {
+                    newList.Add(religionInCountry.Country);
+                }
+
+                return newList;
+        }
 
         public void PopulateContinets()
         {
