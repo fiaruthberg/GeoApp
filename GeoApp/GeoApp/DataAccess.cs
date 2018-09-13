@@ -46,10 +46,26 @@ namespace GeoApp
                 context.Remove(region);
             }
         }
-
+		
         internal void SaveChanges()
         {
             context.SaveChanges();
         }
-    }
+
+		public List<Country>GetAllCountriesToList()
+		{
+			var list = new List<Country>();
+			
+			return list;
+		}
+
+		public List<Country> GetAllCountriesToListWithLetter(string input)
+		{
+			var list = new List<Country>();
+
+			return list;
+		}
+
+
+	}
 }
