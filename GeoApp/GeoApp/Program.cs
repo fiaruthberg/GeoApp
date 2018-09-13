@@ -140,17 +140,12 @@ namespace GeoApp
             dataAccess.ClearDatabase();
             dataAccess.SaveChanges();
         }
-
         private static void InitDatabase()
         {
             dataAccess.PopulateSimpleTables();
             dataAccess.SaveChanges();
         }
-<<<<<<< HEAD
-        private static void DisplayCountriesByReligion(string religion)
-=======
         private static void DisplayCountriesByReligion()
->>>>>>> e5ffc52d2f0f86305fcc4dedda9d183d1f3144cb
         {
             WriteInWhiteWithoutNewLine(" Enter the id of the religion do you wish to see more information about: ");
             var religion = int.Parse(Console.ReadLine());
