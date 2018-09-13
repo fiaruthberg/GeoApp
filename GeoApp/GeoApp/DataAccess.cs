@@ -105,7 +105,7 @@ namespace GeoApp
             return newList;
         }
 
-        internal List<Religion> GetAllReligions()
+        public List<Religion> GetAllReligions()
         {
             return context.Religions.ToList();
         }
