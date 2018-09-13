@@ -87,9 +87,14 @@ namespace GeoApp
         {
             throw new NotImplementedException();
         }
-        private static void DisplayCountriesByReligion()
+        private static void DisplayCountriesByReligion(Religion religion)
         {
-            List<Country> countries = dataAccess.GetCountriesByReligion();
+            List<Country> countries = dataAccess.GetCountriesByReligion(religion);
+
+            foreach (var country in countries)
+            {
+                Console.WriteLine(country);
+            }
 
         }
     }
