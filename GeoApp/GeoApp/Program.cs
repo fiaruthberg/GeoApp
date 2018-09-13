@@ -105,13 +105,11 @@ namespace GeoApp
             Console.Clear();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(" *********************************");
-            Console.WriteLine();
-            Console.WriteLine("         ╔═╗┌─┐┌─┐╔═╗┌─┐┌─┐");
-            Console.WriteLine("         ║ ╦├┤ │ │╠═╣├─┘├─┘");
-            Console.WriteLine("         ╚═╝└─┘└─┘╩ ╩┴  ┴  ");
-            Console.WriteLine();
-            Console.WriteLine(" *********************************");
+            Console.WriteLine("                            ");
+            Console.WriteLine("   ╔═╗┌─┐┌─┐╔═╗┌─┐┌─┐       ");
+            Console.WriteLine("   ║ ╦├┤ │ │╠═╣├─┘├─┘       ");
+            Console.WriteLine("   ╚═╝└─┘└─┘╩ ╩┴  ┴         ");
+            Console.WriteLine("                            ");
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine();
