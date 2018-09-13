@@ -37,10 +37,10 @@ namespace GeoApp
         private static void PageMainMenu()
         {
             ShowAppLogo();
-            WriteInWhite("What would you like to do?\n");
+            WriteInWhite(" What would you like to do?\n");
 
-            Console.WriteLine("A) Show all countries");
-            Console.WriteLine("B) Show all religions");
+            Console.WriteLine(" A) Show all countries");
+            Console.WriteLine(" B) Show all religions");
 
             ConsoleKey command = Console.ReadKey().Key;
             switch (command)
@@ -90,7 +90,7 @@ namespace GeoApp
         }
 		private static void ShowAllCountriesWithCertainLetter()
 		{
-		    Console.WriteLine("Write a letter and show all countries that start with the letter");
+		    Console.WriteLine(" Write a letter and show all countries that start with the letter");
 			char input = char.Parse(Console.ReadLine());
 			var showCountries = dataAccess.GetAllCountriesToListWithLetter(input);
 
@@ -157,7 +157,7 @@ namespace GeoApp
 
             ShowAppLogo();
             ReligionInfo(religion);
-            WriteInWhite("Countries");
+            WriteInWhite(" Countries");
             foreach (var country in dataAccess.GetCountriesByReligion(religion))
             {
                 Console.WriteLine(" " + country.Name);
@@ -175,23 +175,23 @@ namespace GeoApp
                     switch (newItem.Name)
                     {
                         case "Christianity":
-                            Header("Christianity\n");
+                            Header(" Christianity\n");
                             Console.WriteLine(" " + SpliceText(@" Christianity is a religion based upon Jesus of Nazareth's life and his teachings. It is the largest religion in the world today with more than 2.2 billion followers.", 50));
                             break;
                         case "Islam":
-                            Header("Islam\n");
+                            Header(" Islam\n");
                             Console.WriteLine(" " + SpliceText(@" Islam is a monotheistic, Abrahamic religion that originated with the teachings of the Islamic prophet Muhammad, both a 7th century Arab religious and political figure.", 50));
                             break;
                         case "Hinduism":
-                            Header("Hindusim\n");
+                            Header(" Hindusim\n");
                             Console.WriteLine(" " + SpliceText(@" Hinduism is the 3rd largest religion in the world, after Christianity and Islam", 50));
                             break;
                         case "Buddhism":
-                            Header("Buddhism\n");
+                            Header(" Buddhism\n");
                             Console.WriteLine(" " + SpliceText(@" Buddhism is an extensive and internally diverse tradition with two main branches. With 360 million followers, Buddhism is the fourth largest religion in the world.", 50));
                             break;
                         case "Judaism":
-                            Header("Judaism\n");
+                            Header(" Judaism\n");
                             Console.WriteLine(" " + SpliceText(@" The most important religious text of Judaism is the Torah and its laws are called Halakhah. Judaism teaches that there is one God. The Hebrew bible is called the Tanakh and followers of Judaism are Jews", 50));
                             break;
                         default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
