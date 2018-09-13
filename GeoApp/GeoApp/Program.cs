@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GeoApp
 {
@@ -52,11 +53,13 @@ namespace GeoApp
         private static void ReligionsMenu()
         {
             ShowAppLogo();
+            DisplayAllReligions();
 
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine(" A) Choose a religion");
             Console.WriteLine(" B) Go back to main menu");
 
-            DisplayAllReligions();
 
             ConsoleKey command = Console.ReadKey().Key;
             switch (command)
@@ -147,20 +150,76 @@ namespace GeoApp
         }
         private static void DisplayCountriesByReligion()
         {
+            Console.WriteLine();
+            Console.WriteLine();
             WriteInWhiteWithoutNewLine(" Enter the id of the religion do you wish to see more information about: ");
             var religion = int.Parse(Console.ReadLine());
 
-            Console.WriteLine();
+            ShowAppLogo();
+            ReligionInfo(religion);
+            WriteInWhite("Countries");
             foreach (var country in dataAccess.GetCountriesByReligion(religion))
             {
                 Console.WriteLine(" " + country.Name);
             }
 
         }
+        private static void ReligionInfo(int religionId)
+        {
+            var religionList = dataAccess.GetAllReligions();
 
+            foreach (var newItem in religionList)
+            {
+                if (newItem.Id == religionId)
+                {
+                    switch (newItem.Name)
+                    {
+                        case "Christianity":
+                            Header("Christianity\n");
+                            Console.WriteLine(" " + SpliceText(@" Christianity is a religion based upon Jesus of Nazareth's life and his teachings. It is the largest religion in the world today with more than 2.2 billion followers.", 50));
+                            break;
+                        case "Islam":
+                            Header("Islam\n");
+                            Console.WriteLine(" " + SpliceText(@" Islam is a monotheistic, Abrahamic religion that originated with the teachings of the Islamic prophet Muhammad, both a 7th century Arab religious and political figure.", 50));
+                            break;
+                        case "Hinduism":
+                            Header("Hindusim\n");
+                            Console.WriteLine(" " + SpliceText(@" Hinduism is the 3rd largest religion in the world, after Christianity and Islam", 50));
+                            break;
+                        case "Buddhism":
+                            Header("Buddhism\n");
+                            Console.WriteLine(" " + SpliceText(@" Buddhism is an extensive and internally diverse tradition with two main branches. With 360 million followers, Buddhism is the fourth largest religion in the world.", 50));
+                            break;
+                        case "Judaism":
+                            Header("Judaism\n");
+                            Console.WriteLine(" " + SpliceText(@" The most important religious text of Judaism is the Torah and its laws are called Halakhah. Judaism teaches that there is one God. The Hebrew bible is called the Tanakh and followers of Judaism are Jews", 50));
+                            break;
+                        default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                    }
+                }
+            }
+            Console.WriteLine();
+        }
+        private static void Header(string v)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(v);
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        private static string SpliceText(string text, int lineLength)
+        {
+            var charCount = 0;
+            var lines = text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries)
+                            .GroupBy(w => (charCount += w.Length + 1) / lineLength)
+                            .Select(g => string.Join(" ", g));
+
+            return String.Join("\n ", lines.ToArray());
+        }
         private static void WriteInWhiteWithoutNewLine(string v)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write(v);
             Console.ResetColor();
         }
