@@ -138,11 +138,11 @@ namespace GeoApp
             Console.Clear();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine(" *********************************");
-            Console.WriteLine();
-            Console.WriteLine("              GeoApp");
-            Console.WriteLine();
-            Console.WriteLine(" *********************************");
+            Console.WriteLine("                            ");
+            Console.WriteLine("   ╔═╗┌─┐┌─┐╔═╗┌─┐┌─┐       ");
+            Console.WriteLine("   ║ ╦├┤ │ │╠═╣├─┘├─┘       ");
+            Console.WriteLine("   ╚═╝└─┘└─┘╩ ╩┴  ┴         ");
+            Console.WriteLine("                            ");
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine();
@@ -227,23 +227,23 @@ namespace GeoApp
                     {
                         case "Christianity":
                             Header(" Christianity\n");
-                            Console.WriteLine(" " + SpliceText(@" Christianity is a religion based upon Jesus of Nazareth's life and his teachings. It is the largest religion in the world today with more than 2.2 billion followers.", 50));
+                            Console.WriteLine(" " + SpliceText(@" Christianity is a religion based upon Jesus of Nazareth's life and his teachings. It is the largest religion in the world today with more than 2.2 billion followers."));
                             break;
                         case "Islam":
                             Header(" Islam\n");
-                            Console.WriteLine(" " + SpliceText(@" Islam is a monotheistic, Abrahamic religion that originated with the teachings of the Islamic prophet Muhammad, both a 7th century Arab religious and political figure.", 50));
+                            Console.WriteLine(" " + SpliceText(@" Islam is a monotheistic, Abrahamic religion that originated with the teachings of the Islamic prophet Muhammad, both a 7th century Arab religious and political figure."));
                             break;
                         case "Hinduism":
                             Header(" Hindusim\n");
-                            Console.WriteLine(" " + SpliceText(@" Hinduism is the 3rd largest religion in the world, after Christianity and Islam", 50));
+                            Console.WriteLine(" " + SpliceText(@" Hinduism is the 3rd largest religion in the world, after Christianity and Islam"));
                             break;
                         case "Buddhism":
                             Header(" Buddhism\n");
-                            Console.WriteLine(" " + SpliceText(@" Buddhism is an extensive and internally diverse tradition with two main branches. With 360 million followers, Buddhism is the fourth largest religion in the world.", 50));
+                            Console.WriteLine(" " + SpliceText(@" Buddhism is an extensive and internally diverse tradition with two main branches. With 360 million followers, Buddhism is the fourth largest religion in the world."));
                             break;
                         case "Judaism":
                             Header(" Judaism\n");
-                            Console.WriteLine(" " + SpliceText(@" The most important religious text of Judaism is the Torah and its laws are called Halakhah. Judaism teaches that there is one God. The Hebrew bible is called the Tanakh and followers of Judaism are Jews", 50));
+                            Console.WriteLine(" " + SpliceText(@" The most important religious text of Judaism is the Torah and its laws are called Halakhah. Judaism teaches that there is one God. The Hebrew bible is called the Tanakh and followers of Judaism are Jews"));
                             break;
                         default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
                     }
@@ -259,11 +259,11 @@ namespace GeoApp
             Console.WriteLine();
         }
 
-        private static string SpliceText(string text, int lineLength)
+        private static string SpliceText(string text)
         {
             var charCount = 0;
             var lines = text.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries)
-                            .GroupBy(w => (charCount += w.Length + 1) / lineLength)
+                            .GroupBy(w => (charCount += w.Length + 1) / 30)
                             .Select(g => string.Join(" ", g));
 
             return String.Join("\n ", lines.ToArray());
