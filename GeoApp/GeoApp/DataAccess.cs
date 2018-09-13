@@ -41,6 +41,10 @@ namespace GeoApp
             {
                 context.Remove(country);
             }
+            foreach (var region in context.Regions)
+            {
+                context.Remove(region);
+            }
         }
 
         internal void SaveChanges()

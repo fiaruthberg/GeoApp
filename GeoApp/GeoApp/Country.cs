@@ -11,6 +11,7 @@ namespace GeoApp
 		public string Capital { get; set; }
 		public List<Continent> Continent { get; set; }
 		public List<ReligionInCountry> ReligionInCountry { get; set; }
+        public List<TerrainInCountry> TerrainInCountry { get; set; }
 
-	}
+    }
 }

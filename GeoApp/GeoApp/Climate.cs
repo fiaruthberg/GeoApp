@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GeoApp
 {
-    class Climate
+    public class Climate
     {
         public int Id { get; set; }
         public string Name { get; set; }
