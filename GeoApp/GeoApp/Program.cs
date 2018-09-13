@@ -55,6 +55,12 @@ namespace GeoApp
 
         private static void InitDatabase()
         {
+
+
+
+
+
+
             throw new NotImplementedException();
         }
     }
