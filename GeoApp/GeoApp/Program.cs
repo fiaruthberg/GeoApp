@@ -9,24 +9,69 @@ namespace GeoApp
 
         static void Main(string[] args)
         {
-			var dataAccess = new DataAccess();
 			ClearDatabase();
-            InitDatabase(); /* BORIS */
-            PageMainMenu(); /* SOFIA */
+            InitDatabase();
+            PageMainMenu();
         }
-
-        private static void PageMainMenu()
+        private static void CountriesMenu()
         {
-            Console.Clear();
-            WriteInWhite("What would you like to do?\n");
-
-            Console.WriteLine("A) Show all countries");
+            ShowAppLogo();
+            ShowAllCountryNames();
+            Console.WriteLine();
+            Console.WriteLine(" A) Filter countries by first letter");
+            Console.WriteLine(" B) Filter countries by religion");
+            Console.WriteLine(" C) Filter countries by language");
+            Console.WriteLine(" D) Go back to main menu");
 
             ConsoleKey command = Console.ReadKey().Key;
             switch (command)
             {
-                case ConsoleKey.A: ShowAllCountriesInList() /* REZAN */; break;
+                case ConsoleKey.A: ShowAllCountriesWithCertainLetter(); break;
+                case ConsoleKey.B: DisplayCountriesByReligion(); break;
+                case ConsoleKey.C: /* DisplayCountriesByLanguage() */; break;
+                case ConsoleKey.D: PageMainMenu(); break;
                 default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+            }
+        }
+        private static void PageMainMenu()
+        {
+            ShowAppLogo();
+            WriteInWhite("What would you like to do?\n");
+
+            Console.WriteLine("A) Show all countries");
+            Console.WriteLine("B) Show all religions");
+
+            ConsoleKey command = Console.ReadKey().Key;
+            switch (command)
+            {
+                case ConsoleKey.A: CountriesMenu(); break;
+                case ConsoleKey.B: ReligionsMenu(); break;
+                default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+            }
+        }
+        private static void ReligionsMenu()
+        {
+            ShowAppLogo();
+
+            Console.WriteLine(" A) Choose a religion");
+            Console.WriteLine(" B) Go back to main menu");
+
+            DisplayAllReligions();
+
+            ConsoleKey command = Console.ReadKey().Key;
+            switch (command)
+            {
+                case ConsoleKey.A: DisplayCountriesByReligion(); break;
+                case ConsoleKey.B: PageMainMenu(); break;
+                default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+            }
+        }
+
+        private static void DisplayAllReligions()
+        {
+            foreach (var item in dataAccess.GetAllReligions())
+            {
+                Console.WriteLine(item.Id + " " + item.Name);
             }
         }
 
@@ -52,8 +97,21 @@ namespace GeoApp
 			}
 
 		}
-
-		private static void ShowAllCountryNames()
+        private static void ShowAppLogo()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(" *********************************");
+            Console.WriteLine();
+            Console.WriteLine("              GeoApp");
+            Console.WriteLine();
+            Console.WriteLine(" *********************************");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+        private static void ShowAllCountryNames()
 		{
 			var showCountries = dataAccess.GetAllCountriesToList();
 
@@ -88,15 +146,28 @@ namespace GeoApp
             dataAccess.PopulateSimpleTables();
             dataAccess.SaveChanges();
         }
+<<<<<<< HEAD
         private static void DisplayCountriesByReligion(string religion)
+=======
+        private static void DisplayCountriesByReligion()
+>>>>>>> e5ffc52d2f0f86305fcc4dedda9d183d1f3144cb
         {
-            List<Country> countries = dataAccess.GetCountriesByReligion(religion);
+            WriteInWhiteWithoutNewLine(" Enter the id of the religion do you wish to see more information about: ");
+            var religion = int.Parse(Console.ReadLine());
 
-            foreach (var country in countries)
+            Console.WriteLine();
+            foreach (var country in dataAccess.GetCountriesByReligion(religion))
             {
-                Console.WriteLine(country);
+                Console.WriteLine(" " + country.Name);
             }
 
+        }
+
+        private static void WriteInWhiteWithoutNewLine(string v)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(v);
+            Console.ResetColor();
         }
     }
 }

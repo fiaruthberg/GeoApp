@@ -15,5 +15,6 @@ namespace GeoApp
         Forest,
         Plains,
         Mountain,
+		rainForest,
     }
 }
