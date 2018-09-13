@@ -174,7 +174,7 @@ namespace GeoApp
                     Region = new List<Region> { new Region { Name = "Svealand" }, new Region { Name = "Götaland" }, new Region { Name = "Norrland" } },
                     LanguageInCountry = new List<LanguageInCountry> { new LanguageInCountry { Language = swedish } },
                     ReligionInCountry = new List<ReligionInCountry> { new ReligionInCountry { Religion = christendom } },
-                    TerrainInCountry = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest }
+                    TerrainInCountry = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest } } }
             };
         }    
 
