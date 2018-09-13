@@ -33,8 +33,12 @@ namespace GeoApp
         {
             throw new NotImplementedException();
         }
+		private static void ShowAllCountriesWithCertainLetter()
+		{
 
-        private static void WriteInWhite(string v)
+			throw new NotImplementedException();
+		}
+		private static void WriteInWhite(string v)
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(v);
