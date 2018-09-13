@@ -67,11 +67,11 @@ namespace GeoApp
 			
         }
 
-		internal List<Country> GetCountriesByReligion(Religion religion)
+		internal List<Country> GetCountriesByReligion(int religionId)
 		{
                 List<Country> newList = new List<Country>();
 
-                foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.Religion == religion))
+                foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.ReligionId == religionId))
                 {
                     newList.Add(religionInCountry.Country);
                 }
@@ -79,7 +79,12 @@ namespace GeoApp
                 return newList;
         }
 
-    public void PopulateSimpleTables()
+        internal List<Religion> GetAllReligions()
+        {
+            return context.Religions.ToList();
+        }
+
+        public void PopulateSimpleTables()
         {
             var europa = new Continent { Name = "Europe" };
             var africa = new Continent { Name = "Africa" };
