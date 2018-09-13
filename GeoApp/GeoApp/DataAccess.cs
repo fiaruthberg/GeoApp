@@ -67,11 +67,6 @@ namespace GeoApp
 			
         }
 
-		public void PopulateClimates()
-		{
-
-		}
-
 		internal List<Country> GetCountriesByReligion(Religion religion)
 		{
                 List<Country> newList = new List<Country>();
@@ -84,20 +79,6 @@ namespace GeoApp
                 return newList;
         }
 
-        public void PopulateContinets()
-        {
-
-        }
-
-        public void PopulateCountries()
-        {
-
-        }
-
-        public void PopulatePolities()
-        {
-
-        }
     public void PopulateSimpleTables()
         {
             var europa = new Continent { Name = "Europe" };
@@ -106,17 +87,6 @@ namespace GeoApp
             var northAmerica = new Continent { Name = "North America" };
             var southAmerica = new Continent { Name = "South America" };
             var oceania = new Continent { Name = "Oceania" };
-
-            var continentList = new List<Continent>
-            {
-                africa,
-                asia,
-                northAmerica,
-                southAmerica,
-                europa,
-                oceania
-            };
-            context.Continents.AddRange(continentList);
 
             var monarchy = new GovernmentPolity { Polity = Polity.Monarchy };
             var republic = new GovernmentPolity { Polity = Polity.Republic };
@@ -133,35 +103,20 @@ namespace GeoApp
             var subTropical = new Climate { Name = "Sub-Tropical" };
             var temperate = new Climate { Name = "Temperate" };
 
-            var climateList = new List<Climate>
-            {
-                arctic,
-                tropical,
-                subTropical,
-                temperate
-            };
-            context.Climates.AddRange(climateList);
-
-            var christendom = new Religion { Name = "Christianity" };
+            var christianity = new Religion { Name = "Christianity" };
             var islam = new Religion { Name = "Islam" };
             var hinduism = new Religion { Name = "Hinduism" };
             var buddhism = new Religion { Name = "Buddhism" };
             var judaism = new Religion { Name = "Judaism" };
+
+            context.Religions.AddRange(christianity, islam, hinduism, buddhism, judaism);
 
             var desert = new Terrain { Type = TerrainType.Desert };
             var forest = new Terrain { Type = TerrainType.Forest };
             var plains = new Terrain { Type = TerrainType.Plains };
             var mountains = new Terrain { Type = TerrainType.Mountain };
 
-            //var religionlist = new List<Religion>
-            //{
-            //    christendom,
-            //    islam,
-            //    hinduism,
-            //    buddhism,
-            //    judaism
-            //};
-            //context.Religions.AddRange(religionlist);
+            context.Terrains.AddRange(desert, forest, plains, mountains);
 
             var swedish = new Language { Name = "Swedish" };
             var english = new Language { Name = "English" };
@@ -171,10 +126,11 @@ namespace GeoApp
             var countryList = new List<Country>
             {
                 new Country { Name = "Sweden", Capital = "Stockholm", Climate = temperate, Continent = europa, GovernmentPolity = monarchy,
-                    Region = new List<Region> { new Region { Name = "Svealand" }, new Region { Name = "Götaland" }, new Region { Name = "Norrland" } },
-                    LanguageInCountry = new List<LanguageInCountry> { new LanguageInCountry { Language = swedish } },
-                    ReligionInCountry = new List<ReligionInCountry> { new ReligionInCountry { Religion = christendom } },
-                    TerrainInCountry = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest } } }
+                    Regions = new List<Region> { new Region { Name = "Svealand" }, new Region { Name = "Götaland" }, new Region { Name = "Norrland" } },
+                    LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = swedish } },
+                    ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity } },
+                    TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest } } }
+
             };
         }    
 

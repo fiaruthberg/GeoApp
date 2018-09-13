@@ -37,7 +37,7 @@ namespace GeoApp
 
 			foreach (var item in showCountries)
 			{
-				Console.WriteLine(item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountry + " " + item.Climate);
+				Console.WriteLine(item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountries + " " + item.Climate);
 			}
         }
 		private static void ShowAllCountriesWithCertainLetter()
