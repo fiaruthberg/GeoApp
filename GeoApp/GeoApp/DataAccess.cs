@@ -66,6 +66,26 @@ namespace GeoApp
 			return list;
 		}
 
+        public void PopulateClimates()
+        {
+
+        }
+
+        public void PopulateContinets()
+        {
+
+        }
+
+        public void PopulateCountries()
+        {
+
+        }
+
+        public void PopulatePolities()
+        {
+
+        }
+    
 
 	}
 }
