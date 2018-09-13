@@ -55,16 +55,13 @@ namespace GeoApp
 
 		public List<Country> GetAllCountriesToList()
 		{
-
 			return context.Countries.ToList();
 		}
 
 
 		public List<Country> GetAllCountriesToListWithLetter(char input)
 		{
-
 			return context.Countries.Where(x => x.Name.StartsWith(input)).ToList();
-			
         }
 
 		internal List<Country> GetCountriesByReligion(Religion religion)
@@ -75,7 +72,6 @@ namespace GeoApp
                 {
                     newList.Add(religionInCountry.Country);
                 }
-
                 return newList;
         }
 
@@ -132,7 +128,9 @@ namespace GeoApp
                     TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest } } }
 
             };
-        }    
+            context.AddRange(countryList);
+            context.SaveChanges();
+        }
 
 	}
 }
