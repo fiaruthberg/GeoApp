@@ -41,15 +41,36 @@ namespace GeoApp
 
             Console.WriteLine(" A) Show all countries");
             Console.WriteLine(" B) Show all religions");
+			Console.WriteLine(" C) Show all languages");
 
-            ConsoleKey command = Console.ReadKey().Key;
+			ConsoleKey command = Console.ReadKey().Key;
             switch (command)
             {
                 case ConsoleKey.A: CountriesMenu(); break;
                 case ConsoleKey.B: ReligionsMenu(); break;
+				case ConsoleKey.C: LanguageMenu(); break;
                 default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
             }
         }
+
+		private static void LanguageMenu()
+		{
+			ShowAppLogo();
+			DisplayAllLanguages();
+			Console.WriteLine();
+			Console.WriteLine();
+			Console.WriteLine(" A) Choose a Language");
+			Console.WriteLine(" B) Go back to main menu");
+
+
+			ConsoleKey command = Console.ReadKey().Key;
+			switch (command)
+			{
+				case ConsoleKey.A: DisplayCountriesByLanguage(); break;
+				case ConsoleKey.B: PageMainMenu(); break;
+				default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+			}
+		}
         private static void ReligionsMenu()
         {
             ShowAppLogo();
@@ -78,7 +99,18 @@ namespace GeoApp
             }
         }
 
-        private static void ShowAllCountriesInList()
+		private static void DisplayAllLanguages()
+		{
+			foreach (var item in dataAccess.GetAllLanguages())
+			{
+				Console.WriteLine(item.Id + " " + item.Name);
+			}
+		}
+
+
+
+
+		private static void ShowAllCountriesInList()
         {
 
 			var showCountries = dataAccess.GetAllCountriesToList();
@@ -88,6 +120,7 @@ namespace GeoApp
 				Console.WriteLine(item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountries + " " + item.Climate);
 			}
         }
+
 		private static void ShowAllCountriesWithCertainLetter()
 		{
 		    Console.WriteLine(" Write a letter and show all countries that start with the letter");
@@ -148,7 +181,23 @@ namespace GeoApp
             dataAccess.PopulateSimpleTables();
             dataAccess.SaveChanges();
         }
-        private static void DisplayCountriesByReligion()
+
+		private static void DisplayCountriesByLanguage()
+		{
+			Console.WriteLine();
+			Console.WriteLine();
+			WriteInWhiteWithoutNewLine(" Enter the id of the language to see in which countries it is spoken: ");
+			var language = int.Parse(Console.ReadLine());
+
+			foreach (var country in dataAccess.GetCountriesByLanguage(language))
+			{
+				Console.WriteLine(" " + country.Country.Name);
+			}
+
+		}
+
+
+		private static void DisplayCountriesByReligion()
         {
             Console.WriteLine();
             Console.WriteLine();
@@ -164,6 +213,8 @@ namespace GeoApp
             }
 
         }
+
+
         private static void ReligionInfo(int religionId)
         {
             var religionList = dataAccess.GetAllReligions();

@@ -83,7 +83,14 @@ namespace GeoApp
                 }
                 return newList;
         }
-        public List<Country> GetCountriesByTerrain(string type)
+
+		public List<LanguageInCountry> GetCountriesByLanguage(int languageId)
+		{
+			
+           return context.LanguagesInCoyntry.Where(x => x.LanguageId == languageId).ToList();
+		
+		}
+		public List<Country> GetCountriesByTerrain(string type)
         {
             TerrainType a = Enum.Parse<TerrainType>(type);
             List<Country> newList = new List<Country>();
@@ -110,7 +117,12 @@ namespace GeoApp
             return context.Religions.ToList();
         }
 
-        public void PopulateSimpleTables()
+		public List<Language> GetAllLanguages()
+		{
+			return context.Languages.ToList();
+		}
+
+		public void PopulateSimpleTables()
         {
             var europa = new Continent { Name = "Europe" };
             var africa = new Continent { Name = "Africa" };
