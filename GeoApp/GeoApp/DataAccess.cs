@@ -76,21 +76,55 @@ namespace GeoApp
             throw new NotImplementedException();
         }
 
-        public void PopulateContinets()
+        public void PopulateSimpleTables()
         {
+            var europa = new Continent { Name = "Europe" };
+            var africa = new Continent { Name = "Africa" };
+            var asia = new Continent { Name = "Asia" };
+            var northAmerica = new Continent { Name = "North America" };
+            var southAmerica = new Continent { Name = "South America" };
+            var oceania = new Continent { Name = "Oceania" };
 
-        }
+            var continentList = new List<Continent>
+            {
+                africa,
+                asia,
+                northAmerica,
+                southAmerica,
+                europa,
+                oceania
+            };
+            context.Continents.AddRange(continentList);
 
-        public void PopulateCountries()
-        {
+            var monarchy = new GovernmentPolity { Polity = Polity.Monarchy };
+            var republic = new GovernmentPolity { Polity = Polity.Republic };
 
-        }
+            var polityList = new List<GovernmentPolity>
+            {
+                monarchy,
+                republic
+            };
+            context.GovernmentPolities.AddRange(polityList);
 
-        public void PopulatePolities()
-        {
+            var arctic = new Climate { Name = "Arctic" };
+            var tropical = new Climate { Name = "Tropical" };
+            var subTropical = new Climate { Name = "Sub-Tropical" };
+            var temperate = new Climate { Name = "Temperate" };
 
-        }
-    
+            var climateList = new List<Climate>
+            {
+                arctic,
+                tropical,
+                subTropical,
+                temperate
+            };
+            context.Climates.AddRange(climateList);
+
+            var countryList = new List<Country>
+            {
+                new Country { Name = "Sweden", Capital = "Stockholm", Climate = temperate, Continent = europa, GovernmentPolity = monarchy,  }
+            };
+        }    
 
 	}
 }
