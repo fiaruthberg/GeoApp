@@ -107,7 +107,9 @@ namespace GeoApp
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(" *********************************");
             Console.WriteLine();
-            Console.WriteLine("              GeoApp");
+            Console.WriteLine("╔═╗┌─┐┌─┐╔═╗┌─┐┌─┐");
+            Console.WriteLine("║ ╦├┤ │ │╠═╣├─┘├─┘");
+            Console.WriteLine("╚═╝└─┘└─┘╩ ╩┴  ┴  ");
             Console.WriteLine();
             Console.WriteLine(" *********************************");
             Console.ResetColor();
