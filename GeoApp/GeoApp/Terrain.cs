@@ -12,7 +12,7 @@ namespace GeoApp
     public enum TerrainType
     {
         Desert,
-        Forrest,
+        Forest,
         Plains,
         Mountain,
     }

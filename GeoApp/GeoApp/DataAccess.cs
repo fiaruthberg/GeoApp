@@ -142,9 +142,39 @@ namespace GeoApp
             };
             context.Climates.AddRange(climateList);
 
+            var christendom = new Religion { Name = "Christianity" };
+            var islam = new Religion { Name = "Islam" };
+            var hinduism = new Religion { Name = "Hinduism" };
+            var buddhism = new Religion { Name = "Buddhism" };
+            var judaism = new Religion { Name = "Judaism" };
+
+            var desert = new Terrain { Type = TerrainType.Desert };
+            var forest = new Terrain { Type = TerrainType.Forest };
+            var plains = new Terrain { Type = TerrainType.Plains };
+            var mountains = new Terrain { Type = TerrainType.Mountain };
+
+            //var religionlist = new List<Religion>
+            //{
+            //    christendom,
+            //    islam,
+            //    hinduism,
+            //    buddhism,
+            //    judaism
+            //};
+            //context.Religions.AddRange(religionlist);
+
+            var swedish = new Language { Name = "Swedish" };
+            var english = new Language { Name = "English" };
+
+            context.Languages.AddRange(swedish, english);
+
             var countryList = new List<Country>
             {
-                new Country { Name = "Sweden", Capital = "Stockholm", Climate = temperate, Continent = europa, GovernmentPolity = monarchy,  }
+                new Country { Name = "Sweden", Capital = "Stockholm", Climate = temperate, Continent = europa, GovernmentPolity = monarchy,
+                    Region = new List<Region> { new Region { Name = "Svealand" }, new Region { Name = "Götaland" }, new Region { Name = "Norrland" } },
+                    LanguageInCountry = new List<LanguageInCountry> { new LanguageInCountry { Language = swedish } },
+                    ReligionInCountry = new List<ReligionInCountry> { new ReligionInCountry { Religion = christendom } },
+                    TerrainInCountry = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest }
             };
         }    
 
