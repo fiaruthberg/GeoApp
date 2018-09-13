@@ -143,7 +143,8 @@ namespace GeoApp
 
         private static void InitDatabase()
         {
-            throw new NotImplementedException();
+            dataAccess.PopulateSimpleTables();
+            dataAccess.SaveChanges();
         }
         private static void DisplayCountriesByReligion()
         {
