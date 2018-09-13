@@ -15,7 +15,7 @@ namespace GeoApp
         public List<LanguageInCountry> LanguageInCountry { get; set; }
         public Climate Climate { get; set; }
         public GovernmentPolity GovernmentPolity { get; set; }
-        public Region Region { get; set; }
+        public List<Region> Region { get; set; }
 
     }
 }
