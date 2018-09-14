@@ -10,8 +10,8 @@ namespace GeoApp
 
         static void Main(string[] args)
         {
-            ClearDatabase();
-            InitDatabase();
+            //ClearDatabase();
+            //InitDatabase();
             PageMainMenu();
         }
         private static void CountriesMenu()
@@ -66,8 +66,73 @@ namespace GeoApp
                     case ConsoleKey.C: startOver = false; LanguageMenu(); break;
                     case ConsoleKey.D: startOver = false; ContinentMenu(); break;
                     case ConsoleKey.E: startOver = false; TerrainMenu(); break;
+                    case ConsoleKey.F: startOver = false; ClimateMenu(); break;
+                    case ConsoleKey.G: startOver = false; break;
                     default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
                 }
+            }
+        }
+
+        private static void ClimateMenu()
+        {
+            ShowAppLogo();
+            DisplayAllClimates();
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(" A) Choose a climate");
+            Console.WriteLine(" B) Go back to main menu");
+
+
+            ConsoleKey command = Console.ReadKey().Key;
+            bool startOver = true;
+
+            while (startOver)
+            {
+                switch (command)
+                {
+                    case ConsoleKey.A: startOver = false; DisplayCountriesByClimate(); break;
+                    case ConsoleKey.B: startOver = false; PageMainMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
+
+                }
+            }
+        }
+
+        private static void DisplayCountriesByClimate()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            WriteInWhiteWithoutNewLine(" Enter the id of the climate do you wish to see a list of countries with chosen terrain: ");
+            var climateId = int.Parse(Console.ReadLine());
+
+            bool myBool = dataAccess.ValidateClimate(climateId);
+
+            while (dataAccess.ValidateContinent(climateId) == false)
+            {
+                WriteInRed("Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine("Please try again: ");
+                climateId = int.Parse(Console.ReadLine());
+                myBool = dataAccess.ValidateReligion(climateId);
+            }
+
+            ShowAppLogo();
+            WriteInWhite(" Countries with chosen climate");
+            foreach (var country in dataAccess.GetCountriesByClimate(climateId))
+            {
+                Console.WriteLine(" " + country.Name);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Press any key to go back to all climates");
+            Console.ReadKey();
+            ClimateMenu();
+        }
+
+        private static void DisplayAllClimates()
+        {
+            foreach (var item in dataAccess.GetAllClimates())
+            {
+                Console.WriteLine(" " + item.Id + " " + item.Name);
             }
         }
 
@@ -99,14 +164,17 @@ namespace GeoApp
 
         private static void DisplayAllTerrains()
         {
-            throw new NotImplementedException();
+            foreach (var item in dataAccess.GetAllTerrains())
+            {
+                Console.WriteLine(" " + item.Id + " " + item.Type);
+            }
         }
 
         private static void DisplayCountriesByTerrain()
         {
             Console.WriteLine();
             Console.WriteLine();
-            WriteInWhiteWithoutNewLine(" Enter the id of the terrain do you wish to see more information about: ");
+            WriteInWhiteWithoutNewLine(" Enter the id of the terrain do you wish to see a list of countries with chosen terrain: ");
             var terrainId = int.Parse(Console.ReadLine());
 
             bool myBool = dataAccess.ValidateTerrain(terrainId);
@@ -120,7 +188,6 @@ namespace GeoApp
             }
 
             ShowAppLogo();
-            ContinentInfo(terrainId);
             WriteInWhite(" Countries with chosen terrain");
             foreach (var country in dataAccess.GetCountriesByContinent(terrainId))
             {
@@ -129,7 +196,7 @@ namespace GeoApp
             Console.WriteLine();
             Console.WriteLine("Press any key to go back to all terrains");
             Console.ReadKey();
-            ContinentMenu();
+            TerrainMenu();
         }
 
         private static void ContinentMenu()
