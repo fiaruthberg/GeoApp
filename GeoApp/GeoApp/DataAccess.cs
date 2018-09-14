@@ -143,8 +143,9 @@ namespace GeoApp
             var creole = new Language { Name = "Creole" };
             var hiriMotu = new Language { Name = "Hiri Motu" };
             var russian = new Language { Name = "Russian" };
+            var hebrew = new Language { Name = "Hebrew" };
 
-            context.Languages.AddRange(swedish, english);
+            context.Languages.AddRange(swedish, english, spanish, arabic, sinhala, swahili, creole, hiriMotu, russian, hebrew);
 
             var countryList = new List<Country>
             {
@@ -153,6 +154,18 @@ namespace GeoApp
                     LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = swedish } },
                     ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity } },
                     TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest } } },
+
+                new Country { Name = "Spain", Capital = "Madrid", Climate = temperate, Continent = europa, GovernmentPolity = monarchy,
+                    Regions = new List<Region> { new Region { Name = "Andalucia" }, new Region { Name = "Aragon" }, new Region { Name = "Asturias" } },
+                    LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = spanish } },
+                    ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity } },
+                    TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = mountains } } },
+
+                new Country { Name = "Israel", Capital = "Jerusalem", Climate = temperate, Continent = asia, GovernmentPolity = republic,
+                    Regions = new List<Region> { new Region { Name = "East Israel" }, new Region { Name = "Middle Israel" }, new Region { Name = "West Israel" } },
+                    LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = hebrew } },
+                    ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion =judaism } },
+                    TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = desert } } },
 
                   new Country { Name = "Panama", Capital = "Panama City", Climate = tropical, Continent = southAmerica, GovernmentPolity = republic,
                     Regions = new List<Region> { new Region { Name = "North" }, new Region { Name = "Middle" }, new Region { Name = "South" } },

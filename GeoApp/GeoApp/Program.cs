@@ -19,10 +19,10 @@ namespace GeoApp
 			ShowAppLogo();
 			ShowAllCountryNames();
 			Console.WriteLine();
-			Console.WriteLine(" A) Filter countries by first letter");
-			Console.WriteLine(" B) Filter countries by religion");
-			Console.WriteLine(" C) Filter countries by language");
-			Console.WriteLine(" D) Go back to main menu");
+			Console.WriteLine(" [A] Filter countries by first letter");
+			Console.WriteLine(" [B] Filter countries by religion");
+			Console.WriteLine(" [C] Filter countries by language");
+			Console.WriteLine(" [D] Go back to main menu");
 
 			ConsoleKey command = Console.ReadKey().Key;
 			bool startOver = true;
@@ -46,13 +46,13 @@ namespace GeoApp
             Console.CursorVisible = false;
             WriteInWhite(" What would you like to do?\n");
 
-            Console.WriteLine(" A) Show all countries");
-            Console.WriteLine(" B) Show all religions");
-            Console.WriteLine(" C) Show all languages");
-            Console.WriteLine(" D) Show all continents");
-            Console.WriteLine(" E) Show all terrains");
-            Console.WriteLine(" F) Show all climates");
-            Console.WriteLine(" G) Show all info about countries");
+            Console.WriteLine(" [A] Show all countries");
+            Console.WriteLine(" [B] Show all religions");
+            Console.WriteLine(" [C] Show all languages");
+            Console.WriteLine(" [D] Show all continents");
+            Console.WriteLine(" [E] Show all terrains");
+            Console.WriteLine(" [F] Show all climates");
+            Console.WriteLine(" [G] Show all info about countries");
             Console.WriteLine(" Press [esc] to EXIT");
 
 			ConsoleKey command = Console.ReadKey().Key;
@@ -87,8 +87,8 @@ namespace GeoApp
 
 			Console.WriteLine();
 			Console.WriteLine();
-			Console.WriteLine(" A) Choose a climate");
-			Console.WriteLine(" B) Go back to main menu");
+			Console.WriteLine(" [A] Choose a climate");
+			Console.WriteLine(" [B] Go back to main menu");
 
 
 			ConsoleKey command = Console.ReadKey().Key;
@@ -149,8 +149,8 @@ namespace GeoApp
 
 			Console.WriteLine();
 			Console.WriteLine();
-			Console.WriteLine(" A) Choose a terrain");
-			Console.WriteLine(" B) Go back to main menu");
+			Console.WriteLine(" [A] Choose a terrain");
+			Console.WriteLine(" [B] Go back to main menu");
 
 
 			ConsoleKey command = Console.ReadKey().Key;
@@ -190,12 +190,12 @@ namespace GeoApp
                 WriteInRed(" Are you sure you entered a valid id?");
                 WriteInWhiteWithoutNewLine(" Please try again: ");
                 terrainId = int.Parse(Console.ReadLine());
-                myBool = dataAccess.ValidateReligion(terrainId);
+                myBool = dataAccess.ValidateTerrain(terrainId);
             }
 
             ShowAppLogo();
             WriteInWhite(" Countries with chosen terrain");
-            foreach (var country in dataAccess.GetCountriesByContinent(terrainId))
+            foreach (var country in dataAccess.GetCountriesByTerrain(terrainId))
             {
                 Console.WriteLine(" " + country.Name);
             }
@@ -212,8 +212,8 @@ namespace GeoApp
 
 			Console.WriteLine();
 			Console.WriteLine();
-			Console.WriteLine(" A) Choose a continent");
-			Console.WriteLine(" B) Go back to main menu");
+			Console.WriteLine(" [A] Choose a continent");
+			Console.WriteLine(" [B] Go back to main menu");
 
 
 			ConsoleKey command = Console.ReadKey().Key;
@@ -238,18 +238,19 @@ namespace GeoApp
 			WriteInWhiteWithoutNewLine(" Enter the id of the continent do you wish to see more information about: ");
 			var continentId = int.Parse(Console.ReadLine());
 
-			bool myBool = dataAccess.ValidateReligion(continentId);
+			bool myBool = dataAccess.ValidateContinent(continentId);
 
             while (myBool == false)
             {
                 WriteInRed(" Are you sure you entered a valid id?");
                 WriteInWhiteWithoutNewLine(" Please try again: ");
                 continentId = int.Parse(Console.ReadLine());
-                myBool = dataAccess.ValidateReligion(continentId);
+                myBool = dataAccess.ValidateContinent(continentId);
             }
 
             ShowAppLogo();
             ContinentInfo(continentId);
+            Console.WriteLine();
             WriteInWhite(" Countries in chosen continent");
             foreach (var country in dataAccess.GetCountriesByContinent(continentId))
             {
@@ -302,7 +303,7 @@ namespace GeoApp
 		}
 		private static void DisplayAllContinents()
 		{
-			foreach (var item in dataAccess.GetAllClimates())
+			foreach (var item in dataAccess.GetAllContinents())
 			{
 				Console.WriteLine(" " + item.Id + " " + item.Name);
 			}
@@ -314,8 +315,8 @@ namespace GeoApp
 			DisplayAllLanguages();
 			Console.WriteLine();
 			Console.WriteLine();
-			Console.WriteLine(" A) Choose a Language");
-			Console.WriteLine(" B) Go back to main menu");
+			Console.WriteLine(" [A] Choose a Language");
+			Console.WriteLine(" [B] Go back to main menu");
 
 
 			ConsoleKey command = Console.ReadKey().Key;
@@ -338,8 +339,8 @@ namespace GeoApp
 
 			Console.WriteLine();
 			Console.WriteLine();
-			Console.WriteLine(" A) Choose a religion");
-			Console.WriteLine(" B) Go back to main menu");
+			Console.WriteLine(" [A] Choose a religion");
+			Console.WriteLine(" [B] Go back to main menu");
 
 
 			ConsoleKey command = Console.ReadKey().Key;
@@ -373,9 +374,6 @@ namespace GeoApp
 			}
 		}
 
-
-
-
 		private static void ShowAllCountriesInList()
 		{
 
@@ -397,7 +395,6 @@ namespace GeoApp
             {
                 Console.WriteLine(" " + item.Name + " ");
             }
-
         }
         private static void ShowAppLogo()
         {
@@ -429,7 +426,7 @@ namespace GeoApp
 			var showInfo = dataAccess.GetAllCountryInfo();
             ShowAppLogo();
 			Console.ForegroundColor = ConsoleColor.Cyan;
-			Console.WriteLine("\n" + "CONTINENT".PadRight(27) + "COUNTRY".PadRight(27) + "CAPTITAL".PadRight(27) + "CLIMATE".PadRight(27) + "LANGUAGE".PadRight(27) + "TERRAIN".PadRight(27) + "RELIGION".PadRight(27));
+			Console.WriteLine("\n" + " CONTINENT".PadRight(27) + "COUNTRY".PadRight(27) + "CAPTITAL".PadRight(27) + "CLIMATE".PadRight(27) + "LANGUAGE".PadRight(27) + "TERRAIN".PadRight(27) + "RELIGION".PadRight(27));
 			Console.ResetColor();
 
 			foreach (var item in showInfo)
@@ -437,7 +434,7 @@ namespace GeoApp
 				Console.WriteLine();
 				Console.WriteLine();
 				Console.ForegroundColor = ConsoleColor.White;
-				Console.WriteLine(item.Continent.Name.PadRight(27) + item.Name.PadRight(27) + item.Capital.PadRight(27) + item.Climate.Name.PadRight(27) + item.LanguageInCountries.Select(x => x.Language.Name).FirstOrDefault().PadRight(27) + item.TerrainInCountries.Select(x => x.Terrain.Type).FirstOrDefault().ToString().PadRight(27) + item.ReligionInCountries.Select(x => x.Religion.Name).FirstOrDefault().PadRight(27));
+				Console.WriteLine(" " + item.Continent.Name.PadRight(27) + item.Name.PadRight(27) + item.Capital.PadRight(27) + item.Climate.Name.PadRight(27) + item.LanguageInCountries.Select(x => x.Language.Name).FirstOrDefault().PadRight(27) + item.TerrainInCountries.Select(x => x.Terrain.Type).FirstOrDefault().ToString().PadRight(27) + item.ReligionInCountries.Select(x => x.Religion.Name).FirstOrDefault().PadRight(27));
 				Console.ResetColor();
 			}
             Console.WriteLine();
@@ -520,6 +517,7 @@ namespace GeoApp
 
             ShowAppLogo();
             ReligionInfo(religion);
+            Console.WriteLine();
             WriteInWhite(" Countries with chosen religion");
             foreach (var country in dataAccess.GetCountriesByReligion(religion))
             {
