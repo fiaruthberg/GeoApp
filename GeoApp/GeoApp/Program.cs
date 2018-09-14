@@ -32,8 +32,8 @@ namespace GeoApp
                 switch (command)
                 {
                     case ConsoleKey.A: startOver = false; ShowAllCountriesWithCertainLetter(); break;
-                    case ConsoleKey.B: startOver = false; DisplayCountriesByReligion(); break;
-                    case ConsoleKey.C: startOver = false; DisplayCountriesByLanguage(); break;
+                    case ConsoleKey.B: startOver = false; ReligionsMenu(); break;
+                    case ConsoleKey.C: startOver = false; LanguageMenu(); break;
                     case ConsoleKey.D: startOver = false; PageMainMenu(); break;
                     default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
 
@@ -43,6 +43,7 @@ namespace GeoApp
         private static void PageMainMenu()
         {
             ShowAppLogo();
+            Console.CursorVisible = false;
             WriteInWhite(" What would you like to do?\n");
 
             Console.WriteLine(" A) Show all countries");
@@ -51,7 +52,7 @@ namespace GeoApp
             Console.WriteLine(" D) Show all continents");
             Console.WriteLine(" E) Show all terrains");
             Console.WriteLine(" F) Show all climates");
-            Console.WriteLine(" G) EXIT");
+            Console.WriteLine(" Press [esc] to EXIT");
 
             ConsoleKey command = Console.ReadKey().Key;
 
@@ -67,7 +68,7 @@ namespace GeoApp
                     case ConsoleKey.D: startOver = false; ContinentMenu(); break;
                     case ConsoleKey.E: startOver = false; TerrainMenu(); break;
                     case ConsoleKey.F: startOver = false; ClimateMenu(); break;
-                    case ConsoleKey.G: startOver = false; break;
+                    case ConsoleKey.Escape: startOver = false; break;
                     default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
                 }
             }
@@ -110,8 +111,8 @@ namespace GeoApp
 
             while (myBool == false)
             {
-                WriteInRed("Are you sure you entered a valid id?");
-                WriteInWhiteWithoutNewLine("Please try again: ");
+                WriteInRed(" Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine(" Please try again: ");
                 climateId = int.Parse(Console.ReadLine());
                 myBool = dataAccess.ValidateReligion(climateId);
             }
@@ -123,7 +124,7 @@ namespace GeoApp
                 Console.WriteLine(" " + country.Name);
             }
             Console.WriteLine();
-            Console.WriteLine("Press any key to go back to all climates");
+            Console.WriteLine(" Press any key to go back to all climates");
             Console.ReadKey();
             ClimateMenu();
         }
@@ -181,8 +182,8 @@ namespace GeoApp
 
             while (myBool == false)
             {
-                WriteInRed("Are you sure you entered a valid id?");
-                WriteInWhiteWithoutNewLine("Please try again: ");
+                WriteInRed(" Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine(" Please try again: ");
                 terrainId = int.Parse(Console.ReadLine());
                 myBool = dataAccess.ValidateReligion(terrainId);
             }
@@ -194,7 +195,7 @@ namespace GeoApp
                 Console.WriteLine(" " + country.Name);
             }
             Console.WriteLine();
-            Console.WriteLine("Press any key to go back to all terrains");
+            Console.WriteLine(" Press any key to go back to all terrains");
             Console.ReadKey();
             TerrainMenu();
         }
@@ -236,8 +237,8 @@ namespace GeoApp
 
             while (myBool == false)
             {
-                WriteInRed("Are you sure you entered a valid id?");
-                WriteInWhiteWithoutNewLine("Please try again: ");
+                WriteInRed(" Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine(" Please try again: ");
                 continentId = int.Parse(Console.ReadLine());
                 myBool = dataAccess.ValidateReligion(continentId);
             }
@@ -250,7 +251,7 @@ namespace GeoApp
                 Console.WriteLine(" " + country.Name);
             }
             Console.WriteLine();
-            Console.WriteLine("Press any key to go back to all continents");
+            Console.WriteLine(" Press any key to go back to all continents");
             Console.ReadKey();
             ContinentMenu();
         }
@@ -383,13 +384,13 @@ namespace GeoApp
 
         private static void ShowAllCountriesWithCertainLetter()
         {
-            Console.WriteLine(" Write a letter and show all countries that start with the letter");
+            WriteInWhiteWithoutNewLine("\n Write a letter and show all countries that start with the letter");
             char input = char.Parse(Console.ReadLine());
             var showCountries = dataAccess.GetAllCountriesToListWithLetter(input);
 
             foreach (var item in showCountries)
             {
-                Console.WriteLine(item.Name + " ");
+                Console.WriteLine(" " + item.Name + " ");
             }
 
         }
@@ -398,11 +399,11 @@ namespace GeoApp
             Console.Clear();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("                            ");
-            Console.WriteLine("   ╔═╗┌─┐┌─┐╔═╗┌─┐┌─┐       ");
-            Console.WriteLine("   ║ ╦├┤ │ │╠═╣├─┘├─┘       ");
-            Console.WriteLine("   ╚═╝└─┘└─┘╩ ╩┴  ┴         ");
-            Console.WriteLine("                            ");
+            Console.WriteLine("                             ");
+            Console.WriteLine("    ╔═╗┌─┐┌─┐╔═╗┌─┐┌─┐       ");
+            Console.WriteLine("    ║ ╦├┤ │ │╠═╣├─┘├─┘       ");
+            Console.WriteLine("    ╚═╝└─┘└─┘╩ ╩┴  ┴         ");
+            Console.WriteLine("                             ");
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine();
@@ -449,11 +450,27 @@ namespace GeoApp
             WriteInWhiteWithoutNewLine(" Enter the id of the language to see in which countries it is spoken: ");
             var language = int.Parse(Console.ReadLine());
 
+            bool myBool = dataAccess.ValidateLanguage(language);
+
+            while (myBool == false)
+            {
+                WriteInRed(" Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine(" Please try again: ");
+                language = int.Parse(Console.ReadLine());
+                myBool = dataAccess.ValidateLanguage(language);
+            }
+
+            ShowAppLogo();
+            WriteInWhite(" Countries with chosen language");
+
             foreach (var country in dataAccess.GetCountriesByLanguage(language))
             {
                 Console.WriteLine(" " + country.Country.Name);
             }
-
+            Console.WriteLine();
+            Console.WriteLine(" Press any key to go back to all languages");
+            Console.ReadKey();
+            LanguageMenu();
         }
 
 
@@ -468,8 +485,8 @@ namespace GeoApp
 
             while (myBool == false)
             {
-                WriteInRed("Are you sure you entered a valid id?");
-                WriteInWhiteWithoutNewLine("Please try again: ");
+                WriteInRed(" Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine(" Please try again: ");
                 religion = int.Parse(Console.ReadLine());
                 myBool = dataAccess.ValidateReligion(religion);
             }
@@ -482,7 +499,7 @@ namespace GeoApp
                 Console.WriteLine(" " + country.Name);
             }
             Console.WriteLine();
-            Console.WriteLine("Press any key to go back to all religions");
+            Console.WriteLine(" Press any key to go back to all religions");
             Console.ReadKey();
             ReligionsMenu();
         }

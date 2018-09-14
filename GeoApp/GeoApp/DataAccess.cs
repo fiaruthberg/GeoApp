@@ -282,5 +282,13 @@ namespace GeoApp
             }
             return true;
         }
+        internal bool ValidateLanguage(int languageId)
+        {
+            if (!context.Languages.Select(x => x.Id).Contains(languageId))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
