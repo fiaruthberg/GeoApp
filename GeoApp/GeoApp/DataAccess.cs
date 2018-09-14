@@ -72,11 +72,11 @@ namespace GeoApp
             }
             return newList;
         }
-        public List<Country> GetCountriesByClimate(string climate)
+        public List<Country> GetCountriesByClimate(int climateId)
         {
             var newList = new List<Country>();
 
-            foreach (var item in context.Countries.Where(x => x.Climate.Name == climate))
+            foreach (var item in context.Countries.Where(x => x.Climate.Id == climateId))
             {
                 newList.Add(item);
             }
@@ -259,6 +259,10 @@ namespace GeoApp
         {
             return context.Continents.ToList();
         }
+        internal List<Terrain> GetAllTerrains()
+        {
+            return context.Terrains.ToList();
+        }
         internal bool ValidateReligion(int religion)
         {
             if (!context.Religions.Select(x => x.Id).Contains(religion))
@@ -270,6 +274,14 @@ namespace GeoApp
         internal bool ValidateContinent(int continentId)
         {
             if (!context.Continents.Select(x => x.Id).Contains(continentId))
+            {
+                return false;
+            }
+            return true;
+        }
+        internal bool ValidateClimate(int climateId)
+        {
+            if (!context.Climates.Select(x => x.Id).Contains(climateId))
             {
                 return false;
             }
