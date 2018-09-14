@@ -25,13 +25,18 @@ namespace GeoApp
             Console.WriteLine(" D) Go back to main menu");
 
             ConsoleKey command = Console.ReadKey().Key;
-            switch (command)
+            bool startOver = true;
+
+            while (startOver)
             {
-                case ConsoleKey.A: ShowAllCountriesWithCertainLetter(); break;
-                case ConsoleKey.B: DisplayCountriesByReligion(); break;
-                case ConsoleKey.C: /* DisplayCountriesByLanguage() */; break;
-                case ConsoleKey.D: PageMainMenu(); break;
-                default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                switch (command)
+                {
+                    case ConsoleKey.A: startOver = false; ShowAllCountriesWithCertainLetter(); break;
+                    case ConsoleKey.B: startOver = false; DisplayCountriesByReligion(); break;
+                    case ConsoleKey.C: startOver = false; DisplayCountriesByLanguage(); break;
+                    case ConsoleKey.D: startOver = false; PageMainMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Press any key to try again"); Console.ReadKey(); PageMainMenu(); break;
+                }
             }
         }
         private static void PageMainMenu()
@@ -44,12 +49,18 @@ namespace GeoApp
 			Console.WriteLine(" C) Show all languages");
 
 			ConsoleKey command = Console.ReadKey().Key;
-            switch (command)
+
+            bool startOver = true;
+
+            while (startOver)
             {
-                case ConsoleKey.A: CountriesMenu(); break;
-                case ConsoleKey.B: ReligionsMenu(); break;
-				case ConsoleKey.C: LanguageMenu(); break;
-                default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                switch (command)
+                {
+                    case ConsoleKey.A: startOver = false; CountriesMenu(); break;
+                    case ConsoleKey.B: startOver = false; ReligionsMenu(); break;
+                    case ConsoleKey.C: startOver = false; LanguageMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
+                }
             }
         }
 
@@ -64,12 +75,17 @@ namespace GeoApp
 
 
 			ConsoleKey command = Console.ReadKey().Key;
-			switch (command)
-			{
-				case ConsoleKey.A: DisplayCountriesByLanguage(); break;
-				case ConsoleKey.B: PageMainMenu(); break;
-				default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
-			}
+            bool startOver = true;
+
+            while (startOver)
+            {
+                switch (command)
+                {
+                    case ConsoleKey.A: startOver = false; DisplayCountriesByLanguage(); break;
+                    case ConsoleKey.B: startOver = false; PageMainMenu(); break;
+                    default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                }
+            }
 		}
         private static void ReligionsMenu()
         {
@@ -83,11 +99,16 @@ namespace GeoApp
 
 
             ConsoleKey command = Console.ReadKey().Key;
-            switch (command)
+            bool startOver = true;
+
+            while (startOver)
             {
-                case ConsoleKey.A: DisplayCountriesByReligion(); break;
-                case ConsoleKey.B: PageMainMenu(); break;
-                default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                switch (command)
+                {
+                    case ConsoleKey.A: startOver = false; DisplayCountriesByReligion(); break;
+                    case ConsoleKey.B: startOver = false; PageMainMenu(); break;
+                    default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                }
             }
         }
 
@@ -204,14 +225,27 @@ namespace GeoApp
             WriteInWhiteWithoutNewLine(" Enter the id of the religion do you wish to see more information about: ");
             var religion = int.Parse(Console.ReadLine());
 
+            bool myBool = dataAccess.ValidateReligion(religion);
+
+            while(dataAccess.ValidateReligion(religion) == false)
+            {
+                WriteInRed("Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine("Please try again: ");
+                religion = int.Parse(Console.ReadLine());
+                myBool = dataAccess.ValidateReligion(religion);
+            }
+
             ShowAppLogo();
             ReligionInfo(religion);
-            WriteInWhite(" Countries");
+            WriteInWhite(" Countries with chosen religion");
             foreach (var country in dataAccess.GetCountriesByReligion(religion))
             {
                 Console.WriteLine(" " + country.Name);
             }
-
+            Console.WriteLine();
+            Console.WriteLine("Press any key to go back to all religions");
+            Console.ReadKey();
+            ReligionsMenu();
         }
 
 
@@ -248,6 +282,7 @@ namespace GeoApp
                         default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
                     }
                 }
+                
             }
             Console.WriteLine();
         }
