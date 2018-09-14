@@ -10,8 +10,8 @@ namespace GeoApp
 
         static void Main(string[] args)
         {
-			ClearDatabase();
-            InitDatabase();
+			//ClearDatabase();
+            //InitDatabase();
             PageMainMenu();
         }
         private static void CountriesMenu()
@@ -35,7 +35,8 @@ namespace GeoApp
                     case ConsoleKey.B: startOver = false; DisplayCountriesByReligion(); break;
                     case ConsoleKey.C: startOver = false; DisplayCountriesByLanguage(); break;
                     case ConsoleKey.D: startOver = false; PageMainMenu(); break;
-                    default: WriteInRed("\n Not a valid option. Press any key to try again"); Console.ReadKey(); PageMainMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
+
                 }
             }
         }
@@ -83,7 +84,7 @@ namespace GeoApp
                 {
                     case ConsoleKey.A: startOver = false; DisplayCountriesByLanguage(); break;
                     case ConsoleKey.B: startOver = false; PageMainMenu(); break;
-                    default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
                 }
             }
 		}
@@ -107,7 +108,8 @@ namespace GeoApp
                 {
                     case ConsoleKey.A: startOver = false; DisplayCountriesByReligion(); break;
                     case ConsoleKey.B: startOver = false; PageMainMenu(); break;
-                    default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
+
                 }
             }
         }
@@ -116,7 +118,7 @@ namespace GeoApp
         {
             foreach (var item in dataAccess.GetAllReligions())
             {
-                Console.WriteLine(item.Id + " " + item.Name);
+                Console.WriteLine(" " + item.Id + " " + item.Name);
             }
         }
 
@@ -124,7 +126,7 @@ namespace GeoApp
 		{
 			foreach (var item in dataAccess.GetAllLanguages())
 			{
-				Console.WriteLine(item.Id + " " + item.Name);
+				Console.WriteLine(" " + item.Id + " " + item.Name);
 			}
 		}
 
@@ -138,7 +140,7 @@ namespace GeoApp
 
 			foreach (var item in showCountries)
 			{
-				Console.WriteLine(item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountries + " " + item.Climate);
+				Console.WriteLine(" " + item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountries + " " + item.Climate);
 			}
         }
 
