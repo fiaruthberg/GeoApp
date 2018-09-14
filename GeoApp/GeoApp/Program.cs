@@ -10,7 +10,7 @@ namespace GeoApp
 
         static void Main(string[] args)
         {
-			ClearDatabase();
+            ClearDatabase();
             InitDatabase();
             PageMainMenu();
         }
@@ -47,9 +47,13 @@ namespace GeoApp
 
             Console.WriteLine(" A) Show all countries");
             Console.WriteLine(" B) Show all religions");
-			Console.WriteLine(" C) Show all languages");
+            Console.WriteLine(" C) Show all languages");
+            Console.WriteLine(" D) Show all continents");
+            Console.WriteLine(" E) Show all terrains");
+            Console.WriteLine(" F) Show all climates");
+            Console.WriteLine(" G) EXIT");
 
-			ConsoleKey command = Console.ReadKey().Key;
+            ConsoleKey command = Console.ReadKey().Key;
 
             bool startOver = true;
 
@@ -60,22 +64,188 @@ namespace GeoApp
                     case ConsoleKey.A: startOver = false; CountriesMenu(); break;
                     case ConsoleKey.B: startOver = false; ReligionsMenu(); break;
                     case ConsoleKey.C: startOver = false; LanguageMenu(); break;
+                    case ConsoleKey.D: startOver = false; ContinentMenu(); break;
+                    case ConsoleKey.E: startOver = false; TerrainMenu(); break;
                     default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
                 }
             }
         }
 
-		private static void LanguageMenu()
-		{
-			ShowAppLogo();
-			DisplayAllLanguages();
-			Console.WriteLine();
-			Console.WriteLine();
-			Console.WriteLine(" A) Choose a Language");
-			Console.WriteLine(" B) Go back to main menu");
+        private static void TerrainMenu()
+        {
+            ShowAppLogo();
+            DisplayAllTerrains();
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(" A) Choose a terrain");
+            Console.WriteLine(" B) Go back to main menu");
 
 
-			ConsoleKey command = Console.ReadKey().Key;
+            ConsoleKey command = Console.ReadKey().Key;
+            bool startOver = true;
+
+            while (startOver)
+            {
+                switch (command)
+                {
+                    case ConsoleKey.A: startOver = false; DisplayCountriesByTerrain(); break;
+                    case ConsoleKey.B: startOver = false; PageMainMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
+
+                }
+            }
+        }
+
+        private static void DisplayAllTerrains()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void DisplayCountriesByTerrain()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            WriteInWhiteWithoutNewLine(" Enter the id of the terrain do you wish to see more information about: ");
+            var terrainId = int.Parse(Console.ReadLine());
+
+            bool myBool = dataAccess.ValidateTerrain(terrainId);
+
+            while (dataAccess.ValidateContinent(terrainId) == false)
+            {
+                WriteInRed("Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine("Please try again: ");
+                terrainId = int.Parse(Console.ReadLine());
+                myBool = dataAccess.ValidateReligion(terrainId);
+            }
+
+            ShowAppLogo();
+            ContinentInfo(terrainId);
+            WriteInWhite(" Countries with chosen terrain");
+            foreach (var country in dataAccess.GetCountriesByContinent(terrainId))
+            {
+                Console.WriteLine(" " + country.Name);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Press any key to go back to all terrains");
+            Console.ReadKey();
+            ContinentMenu();
+        }
+
+        private static void ContinentMenu()
+        {
+            ShowAppLogo();
+            DisplayAllContinents();
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(" A) Choose a continent");
+            Console.WriteLine(" B) Go back to main menu");
+
+
+            ConsoleKey command = Console.ReadKey().Key;
+            bool startOver = true;
+
+            while (startOver)
+            {
+                switch (command)
+                {
+                    case ConsoleKey.A: startOver = false; DisplayCountriesByContinent(); break;
+                    case ConsoleKey.B: startOver = false; PageMainMenu(); break;
+                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
+
+                }
+            }
+        }
+
+        private static void DisplayCountriesByContinent()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            WriteInWhiteWithoutNewLine(" Enter the id of the continent do you wish to see more information about: ");
+            var continentId = int.Parse(Console.ReadLine());
+
+            bool myBool = dataAccess.ValidateReligion(continentId);
+
+            while (dataAccess.ValidateContinent(continentId) == false)
+            {
+                WriteInRed("Are you sure you entered a valid id?");
+                WriteInWhiteWithoutNewLine("Please try again: ");
+                continentId = int.Parse(Console.ReadLine());
+                myBool = dataAccess.ValidateReligion(continentId);
+            }
+
+            ShowAppLogo();
+            ContinentInfo(continentId);
+            WriteInWhite(" Countries in chosen continent");
+            foreach (var country in dataAccess.GetCountriesByContinent(continentId))
+            {
+                Console.WriteLine(" " + country.Name);
+            }
+            Console.WriteLine();
+            Console.WriteLine("Press any key to go back to all continents");
+            Console.ReadKey();
+            ContinentMenu();
+        }
+
+        private static void ContinentInfo(int continentId)
+        {
+            var continentList = dataAccess.GetAllContinents();
+
+            foreach (var newItem in continentList)
+            {
+                if (newItem.Id == continentId)
+                {
+                    switch (newItem.Name)
+                    {
+                        case "Europe":
+                            Header(" Europe\n");
+                            Console.WriteLine(" " + SpliceText(@" Europe is named after a Phoenician princess called Europa; she was seduced by Greek God Zeus when he disguised himself as a bull."));
+                            break;
+                        case "Oceania":
+                            Header(" Oceania\n");
+                            Console.WriteLine(" " + SpliceText(@" Much of Oceania is sparsely populated and there are more sheep in Oceania than people. Australia was first used as a prison colony by Britain where they would send unwanted criminals and outcasts."));
+                            break;
+                        case "North America":
+                            Header(" North America\n");
+                            Console.WriteLine(" " + SpliceText(@"  North America is the third largest continent in world, ranking just below Asia and Africa (which are the first and second largest continents, respectively)."));
+                            break;
+                        case "Africa":
+                            Header(" Africa\n");
+                            Console.WriteLine(" " + SpliceText(@" Africa covers 6 percent of the earth's total surface and 20.4 percent of the total land area."));
+                            break;
+                        case "Asia":
+                            Header(" Asia\n");
+                            Console.WriteLine(" " + SpliceText(@" With around 30 percent of the earth’s surface area, Asia is the largest of the seven continents on earth."));
+                            break;
+                        case "South America":
+                            Header(" South America\n");
+                            Console.WriteLine(" " + SpliceText(@" Five of the top 50 largest cities in the world are located in South America, and starting with the largest, these are Sao Paulo, Lima, Bogota, Rio, and Santiago."));
+                            break;
+                        default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
+                    }
+                }
+            }
+        }
+        private static void DisplayAllContinents()
+        {
+            foreach (var item in dataAccess.GetAllClimates())
+            {
+                Console.WriteLine(" " + item.Id + " " + item.Name);
+            }
+        }
+
+        private static void LanguageMenu()
+        {
+            ShowAppLogo();
+            DisplayAllLanguages();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(" A) Choose a Language");
+            Console.WriteLine(" B) Go back to main menu");
+
+
+            ConsoleKey command = Console.ReadKey().Key;
             bool startOver = true;
 
             while (startOver)
@@ -87,7 +257,7 @@ namespace GeoApp
                     default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
                 }
             }
-		}
+        }
         private static void ReligionsMenu()
         {
             ShowAppLogo();
@@ -122,40 +292,40 @@ namespace GeoApp
             }
         }
 
-		private static void DisplayAllLanguages()
-		{
-			foreach (var item in dataAccess.GetAllLanguages())
-			{
-				Console.WriteLine(" " + item.Id + " " + item.Name);
-			}
-		}
-
-
-
-
-		private static void ShowAllCountriesInList()
+        private static void DisplayAllLanguages()
         {
-
-			var showCountries = dataAccess.GetAllCountriesToList();
-
-			foreach (var item in showCountries)
-			{
-				Console.WriteLine(" " + item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountries + " " + item.Climate);
-			}
+            foreach (var item in dataAccess.GetAllLanguages())
+            {
+                Console.WriteLine(" " + item.Id + " " + item.Name);
+            }
         }
 
-		private static void ShowAllCountriesWithCertainLetter()
-		{
-		    Console.WriteLine(" Write a letter and show all countries that start with the letter");
-			char input = char.Parse(Console.ReadLine());
-			var showCountries = dataAccess.GetAllCountriesToListWithLetter(input);
 
-			foreach (var item in showCountries)
-			{
-				Console.WriteLine(item.Name + " ");
-			}
 
-		}
+
+        private static void ShowAllCountriesInList()
+        {
+
+            var showCountries = dataAccess.GetAllCountriesToList();
+
+            foreach (var item in showCountries)
+            {
+                Console.WriteLine(" " + item.Name + " " + item.Capital + " " + item.Continent + " " + item.TerrainInCountries + " " + item.Climate);
+            }
+        }
+
+        private static void ShowAllCountriesWithCertainLetter()
+        {
+            Console.WriteLine(" Write a letter and show all countries that start with the letter");
+            char input = char.Parse(Console.ReadLine());
+            var showCountries = dataAccess.GetAllCountriesToListWithLetter(input);
+
+            foreach (var item in showCountries)
+            {
+                Console.WriteLine(item.Name + " ");
+            }
+
+        }
         private static void ShowAppLogo()
         {
             Console.Clear();
@@ -171,16 +341,16 @@ namespace GeoApp
             Console.WriteLine();
         }
         private static void ShowAllCountryNames()
-		{
-			var showCountries = dataAccess.GetAllCountriesToList();
+        {
+            var showCountries = dataAccess.GetAllCountriesToList();
 
-			foreach (var item in showCountries)
-			{
-				Console.WriteLine(" " + item.Name + " ");
-			}
+            foreach (var item in showCountries)
+            {
+                Console.WriteLine(" " + item.Name + " ");
+            }
 
-		}
-		private static void WriteInWhite(string v)
+        }
+        private static void WriteInWhite(string v)
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(v);
@@ -205,22 +375,22 @@ namespace GeoApp
             dataAccess.SaveChanges();
         }
 
-		private static void DisplayCountriesByLanguage()
-		{
-			Console.WriteLine();
-			Console.WriteLine();
-			WriteInWhiteWithoutNewLine(" Enter the id of the language to see in which countries it is spoken: ");
-			var language = int.Parse(Console.ReadLine());
+        private static void DisplayCountriesByLanguage()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            WriteInWhiteWithoutNewLine(" Enter the id of the language to see in which countries it is spoken: ");
+            var language = int.Parse(Console.ReadLine());
 
-			foreach (var country in dataAccess.GetCountriesByLanguage(language))
-			{
-				Console.WriteLine(" " + country.Country.Name);
-			}
+            foreach (var country in dataAccess.GetCountriesByLanguage(language))
+            {
+                Console.WriteLine(" " + country.Country.Name);
+            }
 
-		}
+        }
 
 
-		private static void DisplayCountriesByReligion()
+        private static void DisplayCountriesByReligion()
         {
             Console.WriteLine();
             Console.WriteLine();
@@ -229,7 +399,7 @@ namespace GeoApp
 
             bool myBool = dataAccess.ValidateReligion(religion);
 
-            while(dataAccess.ValidateReligion(religion) == false)
+            while (dataAccess.ValidateReligion(religion) == false)
             {
                 WriteInRed("Are you sure you entered a valid id?");
                 WriteInWhiteWithoutNewLine("Please try again: ");
@@ -284,7 +454,7 @@ namespace GeoApp
                         default: WriteInRed("meh"); Console.ReadKey(); PageMainMenu(); break;
                     }
                 }
-                
+
             }
             Console.WriteLine();
         }

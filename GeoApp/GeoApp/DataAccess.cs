@@ -217,9 +217,54 @@ namespace GeoApp
             context.SaveChanges();
         }
 
+        internal bool ValidateTerrain(int terrainId)
+        {
+            if (!context.Terrains.Select(x => x.Id).Contains(terrainId))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal List<Country> GetCountriesByContinent(int continentId)
+        {
+            var newList = new List<Country>();
+
+            foreach (var item in context.Countries.Where(x => x.Continent.Id == continentId))
+            {
+                newList.Add(item);
+            }
+            return newList;
+        }
+        internal List<Country> GetCountriesByTerrain(int terrainId)
+        {
+            var newList = new List<Country>();
+
+            foreach (var item in context.TerrainInCountries.Where(x => x.Terrain.Id == terrainId))
+            {
+                newList.Add(item.Country);
+            }
+            return newList;
+        }
+        internal List<Climate> GetAllClimates()
+        {
+            return context.Climates.ToList();
+        }
+        internal List<Continent> GetAllContinents()
+        {
+            return context.Continents.ToList();
+        }
         internal bool ValidateReligion(int religion)
         {
             if (!context.Religions.Select(x => x.Id).Contains(religion))
+            {
+                return false;
+            }
+            return true;
+        }
+        internal bool ValidateContinent(int continentId)
+        {
+            if (!context.Continents.Select(x => x.Id).Contains(continentId))
             {
                 return false;
             }
