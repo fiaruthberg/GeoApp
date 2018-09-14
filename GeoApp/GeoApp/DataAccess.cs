@@ -35,21 +35,11 @@ namespace GeoApp
             return context.Countries.Where(x => x.Name.StartsWith(input)).ToList();
         }
 
-        public List<Country> GetCountriesByReligion(string religion)
-        {
-            List<Country> newList = new List<Country>();
-
-            foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.Religion.Name == religion))
-            {
-                newList.Add(religionInCountry.Country);
-            }
-            return newList;
-        }
         public List<Country> GetCountriesByReligion(int religionId)
         {
             List<Country> newList = new List<Country>();
 
-            foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.ReligionId == religionId))
+            foreach (var religionInCountry in context.ReligionsInCountry.Where(x => x.ReligionId == religionId).Include(x=>x.Country))
             {
                 newList.Add(religionInCountry.Country);
             }
@@ -59,7 +49,7 @@ namespace GeoApp
         public List<LanguageInCountry> GetCountriesByLanguage(int languageId)
         {
 
-            return context.LanguagesInCoyntry.Where(x => x.LanguageId == languageId).ToList();
+            return context.LanguagesInCoyntry.Where(x => x.LanguageId == languageId).Include(x=>x.Country).ToList();
 
         }
         public List<Country> GetCountriesByTerrain(string type)
@@ -67,7 +57,7 @@ namespace GeoApp
             TerrainType a = Enum.Parse<TerrainType>(type);
             List<Country> newList = new List<Country>();
 
-            foreach (var item in context.TerrainInCountries.Where(x => x.Terrain.Type == a))
+            foreach (var item in context.TerrainInCountries.Where(x => x.Terrain.Type == a).Include(x=>x.Country))
             {
                 newList.Add(item.Country);
             }
@@ -218,7 +208,6 @@ namespace GeoApp
                     LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = spanish  } },
                     ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity} },
                     TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = plains } } },
-
 
                       new Country { Name = "Tanzania", Capital = "Dodoma", Climate = tropical, Continent = africa, GovernmentPolity = republic,
                     Regions = new List<Region> { new Region { Name = "North" }, new Region { Name = "Middle" }, new Region { Name = "South" } },

@@ -10,8 +10,8 @@ namespace GeoApp
 
 		static void Main(string[] args)
 		{
-			RecreateDatabase();
-			InitDatabase();
+			//RecreateDatabase();
+			//InitDatabase();
 			PageMainMenu();
 		}
 		private static void CountriesMenu()
@@ -387,14 +387,18 @@ namespace GeoApp
 
         private static void ShowAllCountriesWithCertainLetter()
         {
-            WriteInWhiteWithoutNewLine("\n Write a letter and show all countries that start with the letter");
-            char input = char.Parse(Console.ReadLine());
+            WriteInWhiteWithoutNewLine("\n Write a letter and show all countries that start with the letter: ");
+            char input = char.Parse(Console.ReadLine().ToUpper());
             var showCountries = dataAccess.GetAllCountriesToListWithLetter(input);
 
             foreach (var item in showCountries)
             {
                 Console.WriteLine(" " + item.Name + " ");
             }
+            Console.WriteLine();
+            Console.WriteLine(" Press any key to go back to main menu");
+            Console.ReadKey();
+            PageMainMenu();
         }
         private static void ShowAppLogo()
         {
