@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -219,7 +220,16 @@ namespace GeoApp
 
 		public List<Country> GetAllCountryInfo()
 		{
-			return context.Countries.ToList();
+			return context.Countries
+                .Include(x=>x.Continent)
+                .Include(x => x.Climate)
+                .Include(x => x.LanguageInCountries)
+                .ThenInclude(x => x.Language)
+                .Include(x => x.TerrainInCountries)
+                .ThenInclude(x => x.Terrain)
+                .Include(x => x.ReligionInCountries)
+                .ThenInclude(x => x.Religion)
+                .ToList();
 		}
 
 		internal bool ValidateTerrain(int terrainId)

@@ -69,7 +69,7 @@ namespace GeoApp
 					case ConsoleKey.D: startOver = false; ContinentMenu(); break;
 					case ConsoleKey.E: startOver = false; TerrainMenu(); break;
 					case ConsoleKey.F: startOver = false; ClimateMenu(); break;
-					case ConsoleKey.G: startOver = false; ShowAllCountriesInfoMenu(); break;
+					case ConsoleKey.G: startOver = false; ShowAllCountriesInfo(); break;
 					case ConsoleKey.Escape: startOver = false; break;					
 					default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
 				}
@@ -427,7 +427,7 @@ namespace GeoApp
 		private static void ShowAllCountriesInfo()
 		{
 			var showInfo = dataAccess.GetAllCountryInfo();
-
+            ShowAppLogo();
 			Console.ForegroundColor = ConsoleColor.Cyan;
 			Console.WriteLine("\n" + "CONTINENT".PadRight(27) + "COUNTRY".PadRight(27) + "CAPTITAL".PadRight(27) + "CLIMATE".PadRight(27) + "LANGUAGE".PadRight(27) + "TERRAIN".PadRight(27) + "RELIGION".PadRight(27));
 			Console.ResetColor();
@@ -440,8 +440,11 @@ namespace GeoApp
 				Console.WriteLine(item.Continent.Name.PadRight(27) + item.Name.PadRight(27) + item.Capital.PadRight(27) + item.Climate.Name.PadRight(27) + item.LanguageInCountries.Select(x => x.Language.Name).FirstOrDefault().PadRight(27) + item.TerrainInCountries.Select(x => x.Terrain.Type).FirstOrDefault().ToString().PadRight(27) + item.ReligionInCountries.Select(x => x.Religion.Name).FirstOrDefault().PadRight(27));
 				Console.ResetColor();
 			}
-
-		}
+            Console.WriteLine();
+            Console.WriteLine(" Press any key to go back to main menu");
+            Console.ReadKey();
+            PageMainMenu();
+        }
 		private static void WriteInWhite(string v)
 		{
 			Console.ForegroundColor = ConsoleColor.White;
