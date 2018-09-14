@@ -10,8 +10,8 @@ namespace GeoApp
 
         static void Main(string[] args)
         {
-			//ClearDatabase();
-            //InitDatabase();
+			ClearDatabase();
+            InitDatabase();
             PageMainMenu();
         }
         private static void CountriesMenu()
@@ -176,7 +176,7 @@ namespace GeoApp
 
 			foreach (var item in showCountries)
 			{
-				Console.WriteLine(item.Name + " ");
+				Console.WriteLine(" " + item.Name + " ");
 			}
 
 		}
