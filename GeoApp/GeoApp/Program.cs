@@ -108,7 +108,7 @@ namespace GeoApp
 
             bool myBool = dataAccess.ValidateClimate(climateId);
 
-            while (dataAccess.ValidateContinent(climateId) == false)
+            while (myBool == false)
             {
                 WriteInRed("Are you sure you entered a valid id?");
                 WriteInWhiteWithoutNewLine("Please try again: ");
@@ -179,7 +179,7 @@ namespace GeoApp
 
             bool myBool = dataAccess.ValidateTerrain(terrainId);
 
-            while (dataAccess.ValidateContinent(terrainId) == false)
+            while (myBool == false)
             {
                 WriteInRed("Are you sure you entered a valid id?");
                 WriteInWhiteWithoutNewLine("Please try again: ");
@@ -234,7 +234,7 @@ namespace GeoApp
 
             bool myBool = dataAccess.ValidateReligion(continentId);
 
-            while (dataAccess.ValidateContinent(continentId) == false)
+            while (myBool == false)
             {
                 WriteInRed("Are you sure you entered a valid id?");
                 WriteInWhiteWithoutNewLine("Please try again: ");
@@ -466,7 +466,7 @@ namespace GeoApp
 
             bool myBool = dataAccess.ValidateReligion(religion);
 
-            while (dataAccess.ValidateReligion(religion) == false)
+            while (myBool == false)
             {
                 WriteInRed("Are you sure you entered a valid id?");
                 WriteInWhiteWithoutNewLine("Please try again: ");

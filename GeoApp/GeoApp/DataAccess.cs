@@ -274,9 +274,9 @@ namespace GeoApp
             }
             return true;
         }
-        internal bool ValidateClimate(int climatId)
+        internal bool ValidateClimate(int climateId)
         {
-            if (!context.Climates.Select(x => x.Id).Contains(climatId))
+            if (!context.Climates.Select(x => x.Id).Contains(climateId))
             {
                 return false;
             }
