@@ -13,7 +13,7 @@ namespace GeoApp
         {
             context = new GeoContext();
         }
-        internal void ClearDatabase()
+        internal void RecreateDatabase()
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
@@ -118,6 +118,8 @@ namespace GeoApp
             var subTropical = new Climate { Name = "Sub-Tropical" };
             var temperate = new Climate { Name = "Temperate" };
 
+            context.Climates.AddRange(arctic, tropical, subTropical, temperate);
+
             var christianity = new Religion { Name = "Christianity" };
             var islam = new Religion { Name = "Islam" };
             var hinduism = new Religion { Name = "Hinduism" };
@@ -144,8 +146,10 @@ namespace GeoApp
             var hiriMotu = new Language { Name = "Hiri Motu" };
             var russian = new Language { Name = "Russian" };
             var hebrew = new Language { Name = "Hebrew" };
+            var italian = new Language { Name = "Italian" };
+            var german = new Language { Name = "German" };
 
-            context.Languages.AddRange(swedish, english, spanish, arabic, sinhala, swahili, creole, hiriMotu, russian, hebrew);
+            context.Languages.AddRange(swedish, english, spanish, arabic, sinhala, swahili, creole, hiriMotu, russian, hebrew, italian, german);
 
             var countryList = new List<Country>
             {
@@ -173,11 +177,29 @@ namespace GeoApp
                     ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity } },
                     TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = rainForest } } },
 
+                  new Country { Name = "Italy", Capital = "Rome", Climate = tropical, Continent = europa, GovernmentPolity = republic,
+                    Regions = new List<Region> { new Region { Name = "Rome and Lazio" }, new Region { Name = "Liguria" }, new Region { Name = "Venice and the Veneto" } },
+                    LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = italian  } },
+                    ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity } },
+                    TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = mountains } } },
+
                    new Country { Name = "Oman", Capital = "Muskat", Climate = tropical, Continent = asia, GovernmentPolity = monarchy,
                     Regions = new List<Region> { new Region { Name = "Upper Oman" }, new Region { Name = "Middle Oman" }, new Region { Name = "Lower Oman" } },
                     LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = spanish  } },
                     ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = islam } },
                     TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = desert } } },
+
+                   new Country { Name = "Australia", Capital = "Canberra", Climate = tropical, Continent = oceania, GovernmentPolity = monarchy,
+                    Regions = new List<Region> { new Region { Name = "Queensland" }, new Region { Name = "South Australia" }, new Region { Name = "Western Australia" } },
+                    LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = english  } },
+                    ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity } },
+                    TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = desert } } },
+
+                   new Country { Name = "Germany", Capital = "Berlin", Climate = temperate, Continent = asia, GovernmentPolity = republic,
+                    Regions = new List<Region> { new Region { Name = "Berlin and Brandenburg" }, new Region { Name = "Saxony" }, new Region { Name = "Thuringia" } },
+                    LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = german  } },
+                    ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity } },
+                    TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest } } },
 
                    new Country { Name = "Liberia", Capital = "Monrovia", Climate = tropical, Continent = africa, GovernmentPolity = republic,
                     Regions = new List<Region> { new Region { Name = "North" }, new Region { Name = "Middle" }, new Region { Name = "South" } },
@@ -221,11 +243,6 @@ namespace GeoApp
                     LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = russian  } },
                     ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity} },
                     TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = forest } } }
-
-
-
-
-
             };
             context.AddRange(countryList);
             context.SaveChanges();

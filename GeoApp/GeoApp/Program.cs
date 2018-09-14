@@ -10,8 +10,8 @@ namespace GeoApp
 
 		static void Main(string[] args)
 		{
-			//ClearDatabase();
-			//InitDatabase();
+			RecreateDatabase();
+			InitDatabase();
 			PageMainMenu();
 		}
 		private static void CountriesMenu()
@@ -456,9 +456,9 @@ namespace GeoApp
 			Console.ResetColor();
 		}
 
-		private static void ClearDatabase()
+		private static void RecreateDatabase()
 		{
-			dataAccess.ClearDatabase();
+			dataAccess.RecreateDatabase();
 			dataAccess.SaveChanges();
 		}
 		private static void InitDatabase()
