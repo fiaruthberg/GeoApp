@@ -202,7 +202,7 @@ namespace GeoApp
                     ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity} },
                     TerrainInCountries = new List<TerrainInCountry> {new TerrainInCountry { Terrain = plains } } },
 
-                        new Country { Name = "Republic of Moldova", Capital = "	Chișinău", Climate = temperate, Continent = europa, GovernmentPolity = republic,
+                        new Country { Name = "Moldova", Capital = "Chisinau", Climate = temperate, Continent = europa, GovernmentPolity = republic,
                     Regions = new List<Region> { new Region { Name = "North" }, new Region { Name = "Middle" }, new Region { Name = "South" } },
                     LanguageInCountries = new List<LanguageInCountry> { new LanguageInCountry { Language = russian  } },
                     ReligionInCountries = new List<ReligionInCountry> { new ReligionInCountry { Religion = christianity} },
@@ -217,7 +217,12 @@ namespace GeoApp
             context.SaveChanges();
         }
 
-        internal bool ValidateTerrain(int terrainId)
+		public List<Country> GetAllCountryInfo()
+		{
+			return context.Countries.ToList();
+		}
+
+		internal bool ValidateTerrain(int terrainId)
         {
             if (!context.Terrains.Select(x => x.Id).Contains(terrainId))
             {

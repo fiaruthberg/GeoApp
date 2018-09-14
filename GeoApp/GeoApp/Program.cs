@@ -51,7 +51,8 @@ namespace GeoApp
             Console.WriteLine(" D) Show all continents");
             Console.WriteLine(" E) Show all terrains");
             Console.WriteLine(" F) Show all climates");
-            Console.WriteLine(" G) EXIT");
+			Console.WriteLine(" G) Show all info about countries");
+			Console.WriteLine(" H) EXIT");
 
             ConsoleKey command = Console.ReadKey().Key;
 
@@ -66,11 +67,16 @@ namespace GeoApp
                     case ConsoleKey.C: startOver = false; LanguageMenu(); break;
                     case ConsoleKey.D: startOver = false; ContinentMenu(); break;
                     case ConsoleKey.E: startOver = false; TerrainMenu(); break;
-                    default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
+					case ConsoleKey.G: startOver = false; ShowAllCountriesInfoMenu(); break;
+					default: WriteInRed("\n Not a valid option. Please try again"); command = Console.ReadKey().Key; break;
                 }
             }
         }
 
+		private static void ShowAllCountriesInfoMenu()
+		{
+			ShowAllCountriesInfo();
+		}
         private static void TerrainMenu()
         {
             ShowAppLogo();
@@ -350,7 +356,26 @@ namespace GeoApp
             }
 
         }
-        private static void WriteInWhite(string v)
+
+		private static void ShowAllCountriesInfo()
+		{
+			var showInfo = dataAccess.GetAllCountryInfo();
+
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			Console.WriteLine("\n" + "CONTINENT".PadRight(27) + "COUNTRY".PadRight(27) + "CAPTITAL".PadRight(27) + "CLIMATE".PadRight(27) + "LANGUAGE".PadRight(27) + "TERRAIN".PadRight(27) + "RELIGION".PadRight(27));
+			Console.ResetColor();
+
+			foreach (var item in showInfo)
+			{
+				Console.WriteLine();
+				Console.WriteLine();
+				Console.ForegroundColor = ConsoleColor.White;
+				Console.WriteLine(item.Continent.Name.PadRight(27) + item.Name.PadRight(27) + item.Capital.PadRight(27) + item.Climate.Name.PadRight(27) + item.LanguageInCountries.Select(x=>x.Language.Name).FirstOrDefault().PadRight(27) + item.TerrainInCountries.Select(x=> x.Terrain.Type).FirstOrDefault().ToString().PadRight(27) + item.ReligionInCountries.Select(x=> x.Religion.Name).FirstOrDefault().PadRight(27));
+				Console.ResetColor();
+			}
+			
+		}
+		private static void WriteInWhite(string v)
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(v);
